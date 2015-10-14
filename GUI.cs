@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ImageProcessing.Operations;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -43,23 +44,23 @@ namespace ImageProcessing
             /* Setup progress bar */
             /**********************/
 
-                //ResetProgressBar();
-                //progressBar.PerformStep();
-                //HideProgressBar();
+            //ResetProgressBar();
+            //progressBar.PerformStep();
+            //HideProgressBar();
 
             //==========================================================================================
             // TODO: include here your own code
             // Todo: Remove this code from the fucking GUI and put logic elsewhere...
 
             // create a grayscale image
-            image.Apply(Image.Operations.GreyScale);
-            //image.Apply(Image.Operations.Smoothing);
+            //image.Apply(Image.Operations.GreyScale);
+            image.Apply(Image.Operations.Smoothing);
 
             //Find Highest/Lowest Value
             //FindHighestLowestValue(Image);
 
             //Negative thresholding of the background
-            image.Apply(Image.Operations.NegativeThreshold);
+            //image.Apply(Image.Operations.NegativeThreshold);
 
             //Negative thresholding of the background
             //image.Apply(Image.Operations.Opening);
@@ -125,7 +126,7 @@ namespace ImageProcessing
             {
                 for (int y = 0; y < InputImage.Size.Height; y++)
                 {
-                    OutputImage.SetPixel(x, y, Image.GetPixelColor(x, y));               // Set the pixel color at coordinate (x,y)
+                    OutputImage.SetPixel(x, y, GreyScale.CreateColorFromGrayValue(Image.GetPixelColor(x, y)));               // Set the pixel color at coordinate (x,y)
                 }
             }
             pictureBox2.Image = (System.Drawing.Image)OutputImage;                         // Display output image

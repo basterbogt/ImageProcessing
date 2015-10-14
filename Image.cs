@@ -5,15 +5,15 @@ namespace ImageProcessing
 {
     public class Image
     {
-        public enum Operations { GreyScale, Smoothing, Negative, NegativeThreshold, Opening };
+        public enum Operations { /*GreyScale,*/ Smoothing, Negative, NegativeThreshold, Opening };
 
-        private Color[,] pixelArray;
+        private int[,] pixelArray;
 
         public Size Size { get; set; }
 
         public Image(Bitmap InputImage)
         {
-            pixelArray = new Color[InputImage.Size.Width, InputImage.Size.Height]; // Create array to speed-up operations (Bitmap functions are very slow)
+            pixelArray = new int[InputImage.Size.Width, InputImage.Size.Height]; // Create array to speed-up operations (Bitmap functions are very slow)
             Size = InputImage.Size;
 
             // Copy input Bitmap to array            
@@ -21,24 +21,24 @@ namespace ImageProcessing
             {
                 for (int y = 0; y < InputImage.Size.Height; y++)
                 {
-                    pixelArray[x, y] = InputImage.GetPixel(x, y);                // Set pixel color in array at (x,y)
+                    pixelArray[x, y] = GreyScale.ColorToGrey(InputImage.GetPixel(x, y));                // Set pixel color in array at (x,y)
                 }
             }
         }
 
-        public void SetPixels(Color[,] image)
+        public void SetPixels(int[,] image)
         {
             this.pixelArray = image;
         }
-        public Color[,] GetPixels()
+        public int[,] GetPixels()
         {
             return pixelArray;
         }
 
-        public Color GetPixelColor(int x, int y) {
+        public int GetPixelColor(int x, int y) {
             return pixelArray[x, y];
         }
-        public void SetPixelColor(int x, int y, Color color)
+        public void SetPixelColor(int x, int y, int color)
         {
             pixelArray[x, y] = color;
         }
@@ -47,9 +47,9 @@ namespace ImageProcessing
         {
             switch (operation)
             {
-                case Operations.GreyScale:
-                    new GreyScale().Apply(this);
-                    break;
+                //case Operations.GreyScale:
+                //    new GreyScale().Apply(this);
+                //    break;
                 case Operations.Smoothing:
                     new Smoothing().Apply(this);
                     break;
