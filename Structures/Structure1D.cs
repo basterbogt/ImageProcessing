@@ -1,0 +1,36 @@
+﻿using System;
+
+namespace ImageProcessing.Structures
+{
+    public class Structure1D: Structure
+    {
+
+        public enum Alignment { Horizontal, Vertical }
+
+        public Alignment CurrentAlignment = Alignment.Horizontal;
+
+        public Structure1D(Alignment alignment) : base()
+        {
+            CurrentAlignment = alignment;
+        }
+
+
+        public override void SetValues(params byte[] values)
+        {
+            int RowSize = (CurrentAlignment.Equals(Alignment.Horizontal)) ? 1 : values.Length;
+            int ColumnSize = (CurrentAlignment.Equals(Alignment.Horizontal)) ? values.Length : 1;
+
+            StructureSize = new System.Drawing.Size(ColumnSize, RowSize);
+            array = new bool[RowSize][];
+
+            for (int row = 0; row < StructureSize.Height; row++)
+            {
+                array[row] = new bool[ColumnSize];
+                for (int column = 0; column < StructureSize.Width; column++)
+                {
+                    array[row][column] = Convert.ToBoolean(values[((row + 1) * (column + 1)) - 1]); //adding 1 to get actual number, removing 1 to get the index number of that number
+                }
+            }
+        }
+    }
+}

@@ -1,10 +1,13 @@
 ﻿using ImageProcessing.Kernels;
+using ImageProcessing.Structures;
 using System.Drawing;
 
 namespace ImageProcessing.Operations
 {
     public abstract class Operation
     {
+        public enum Operations { Smoothing, Negative, NegativeThreshold, Opening, Erosion, Reconstruction };
+
         public Operation()
         {
 
@@ -62,6 +65,11 @@ namespace ImageProcessing.Operations
 
 
         }
+
+
+
+
+
 
     }
 }

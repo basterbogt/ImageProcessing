@@ -54,13 +54,13 @@ namespace ImageProcessing
 
             // create a grayscale image
             //image.Apply(Image.Operations.GreyScale);
-            image.Apply(Image.Operations.Smoothing);
+            image.Apply(Operation.Operations.Smoothing);
 
             //Find Highest/Lowest Value
             //FindHighestLowestValue(Image);
 
             //Negative thresholding of the background
-            //image.Apply(Image.Operations.NegativeThreshold);
+            image.Apply(Operation.Operations.NegativeThreshold);
 
             //Negative thresholding of the background
             //image.Apply(Image.Operations.Opening);

@@ -5,7 +5,6 @@ namespace ImageProcessing
 {
     public class Image
     {
-        public enum Operations { /*GreyScale,*/ Smoothing, Negative, NegativeThreshold, Opening };
 
         private int[,] pixelArray;
 
@@ -26,6 +25,12 @@ namespace ImageProcessing
             }
         }
 
+        public Image(int[,] pixelArray, Size size)
+        {
+            this.pixelArray = pixelArray;
+            this.Size = Size;
+        }
+
         public void SetPixels(int[,] image)
         {
             this.pixelArray = image;
@@ -43,24 +48,24 @@ namespace ImageProcessing
             pixelArray[x, y] = color;
         }
 
-        public void Apply(Operations operation)
+        public void Apply(Operation.Operations operation)
         {
             switch (operation)
             {
-                //case Operations.GreyScale:
-                //    new GreyScale().Apply(this);
-                //    break;
-                case Operations.Smoothing:
+                case Operation.Operations.Smoothing:
                     new Smoothing().Apply(this);
                     break;
-                case Operations.Negative:
+                case Operation.Operations.Negative:
                     new Negative().Apply(this);
                     break;
-                case Operations.NegativeThreshold:
+                case Operation.Operations.NegativeThreshold:
                     new NegativeThreshold().Apply(this);
                     break;
-                case Operations.Opening:
+                case Operation.Operations.Opening:
                     new Opening().Apply(this);
+                    break;
+                case Operation.Operations.Erosion:
+                    new Erosion().Apply(this);
                     break;
                 default:
                     throw new System.Exception("This operation doesn't exist!");

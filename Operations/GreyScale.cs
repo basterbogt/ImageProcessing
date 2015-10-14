@@ -23,7 +23,7 @@ namespace ImageProcessing.Operations
 
         public static int ColorToGrey(Color color)
         {
-            return (int)((color.R * 0.3) + (color.G * 0.59) + (color.B * 0.11)); // greyscale //https://en.wikipedia.org/wiki/Grayscale -> reason behind constants used
+            return (int)((color.R * 0.299) + (color.G * 0.587) + (color.B * 0.114)); // greyscale //https://en.wikipedia.org/wiki/Grayscale -> reason behind constants used
         }
 
         public static Color ColorToGreyColor(Color color)

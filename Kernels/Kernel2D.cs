@@ -7,7 +7,6 @@ namespace ImageProcessing.Kernels
 
         public Kernel2D(double multiplier) : base(multiplier)
         {
-
         }
 
         public Kernel2D(double multiplier, double[][] array) //: base()
