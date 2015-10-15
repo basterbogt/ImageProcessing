@@ -56,14 +56,19 @@
     <Compile Include="Kernels\Kernel1D.cs" />
     <Compile Include="Kernels\Kernel2D.cs" />
     <Compile Include="Kernels\Kernel.cs" />
+    <Compile Include="Operations\Erosion.cs" />
     <Compile Include="Operations\GreyScale.cs" />
     <Compile Include="Operations\Negative.cs" />
     <Compile Include="Operations\NegativeThreshold.cs" />
     <Compile Include="Operations\Opening.cs" />
     <Compile Include="Operations\Operation.cs" />
+    <Compile Include="Operations\Reconstruction.cs" />
     <Compile Include="Operations\Smoothing.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Structures\Structure.cs" />
+    <Compile Include="Structures\Structure1D.cs" />
+    <Compile Include="Structures\Structure2D.cs" />
     <Compile Include="Toolbox.cs" />
     <EmbeddedResource Include="GUI.resx">
       <DependentUpon>GUI.cs</DependentUpon>

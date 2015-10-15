@@ -10,6 +10,7 @@
         {
             CurrentAlignment = alignment;
         }
+
         public Kernel1D(Alignment alignment, double multiplier) : base(multiplier)
         {
             CurrentAlignment = alignment;
@@ -38,6 +39,7 @@
 
         override public double GetValue(int column, int row = 0)
         {
+            //todo: pretty sure this doesnt work quite yet: .. bas 14/10/15
             return this.array[0][column];
         }
 

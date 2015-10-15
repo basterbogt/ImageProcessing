@@ -1,10 +1,13 @@
 ﻿using ImageProcessing.Kernels;
+using ImageProcessing.Structures;
 using System.Drawing;
 
 namespace ImageProcessing.Operations
 {
     public abstract class Operation
     {
+        public enum Operations { Smoothing, Negative, NegativeThreshold, Opening, Erosion, Reconstruction };
+
         public Operation()
         {
 
@@ -14,8 +17,8 @@ namespace ImageProcessing.Operations
 
         public void ApplyKernel(Image Image, Kernel kernel)
         {
-            Color[,] currentPixels = Image.GetPixels();
-            Color[,] newPixels = new Color[Image.Size.Width, Image.Size.Height];
+            int[,] currentPixels = Image.GetPixels();
+            int[,] newPixels = new int[Image.Size.Width, Image.Size.Height];
 
             //kernel information
             int kernelWidth = kernel.kernelSize.Width;
@@ -48,13 +51,12 @@ namespace ImageProcessing.Operations
                         for (int l = 0; l < kernelHeight; l++)
                         {
                             //Get the current kernal's position's color-value
-                            Color pixelColor = Image.GetPixelColor(kernelStartPositionX + k, kernelStartPositionY + l);
-                            ColourValue += ((double)pixelColor.ToArgb()) * (kernel.GetValue(l, k) * kernel.multiplier); //calculates the value that has to be added, based on the kernel value and multiplier
+                            int pixelColor = Image.GetPixelColor(kernelStartPositionX + k, kernelStartPositionY + l);
+                            ColourValue += (pixelColor * (kernel.GetValue(l, k) * kernel.multiplier)); //calculates the value that has to be added, based on the kernel value and multiplier
                         }
-
                     }
-                    
-                    newPixels[x, y] = Color.FromArgb((int)ColourValue); //sets new value
+
+                    newPixels[x, y] = (int)(ColourValue); //sets new value
                     
                 }
             }
@@ -63,6 +65,11 @@ namespace ImageProcessing.Operations
 
 
         }
+
+
+
+
+
 
     }
 }
