@@ -39,7 +39,7 @@ namespace ImageProcessing
 
             Image image = new Image(InputImage);
 
-
+            
             /**********************/
             /* Setup progress bar */
             /**********************/
@@ -64,6 +64,7 @@ namespace ImageProcessing
 
             //Negative thresholding of the background
             //image.Apply(Operation.Operations.Opening);
+            image.Apply(Operation.Operations.Closing);
 
 
             //Display Image

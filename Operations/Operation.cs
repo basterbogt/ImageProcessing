@@ -6,7 +6,7 @@ namespace ImageProcessing.Operations
 {
     public abstract class Operation
     {
-        public enum Operations { Smoothing, Negative, NegativeThreshold, Opening, Erosion, Reconstruction };
+        public enum Operations { Smoothing, Negative, NegativeThreshold, Opening, Closing, Erosion, Dilation, Reconstruction };
 
         public Operation()
         {

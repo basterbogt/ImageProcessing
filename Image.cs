@@ -5,6 +5,9 @@ namespace ImageProcessing
 {
     public class Image
     {
+        public static int White = 255;
+        public static int Black = 0;
+        public static int Gray = 128;
 
         private int[,] pixelArray;
 
@@ -66,6 +69,12 @@ namespace ImageProcessing
                     break;
                 case Operation.Operations.Erosion:
                     new Erosion().Apply(this);
+                    break;
+                case Operation.Operations.Closing:
+                    new Closing().Apply(this);
+                    break;
+                case Operation.Operations.Dilation:
+                    new Dilation().Apply(this);
                     break;
                 default:
                     throw new System.Exception("This operation doesn't exist!");
