@@ -61,7 +61,7 @@ namespace ImageProcessing.Operations
 
                             if (structureValue)
                             {
-                                if(pixelColor > 128)
+                                if(pixelColor == Image.White)
                                 {
                                     pixelEnabled = false;
                                     break;
@@ -69,7 +69,7 @@ namespace ImageProcessing.Operations
                             }
                             else
                             {
-                                if (pixelColor < 128)
+                                if (pixelColor == Image.Black)
                                 {
                                     pixelEnabled = false;
                                     break;
@@ -79,7 +79,7 @@ namespace ImageProcessing.Operations
                         }
                     }
                     
-                    newPixels[x, y] = (pixelEnabled) ? 0 : 255; //sets new value
+                    newPixels[x, y] = (pixelEnabled) ? Image.Black : Image.White; //sets new value
 
                 }
             }

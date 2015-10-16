@@ -56,6 +56,8 @@
     <Compile Include="Kernels\Kernel1D.cs" />
     <Compile Include="Kernels\Kernel2D.cs" />
     <Compile Include="Kernels\Kernel.cs" />
+    <Compile Include="Operations\Closing.cs" />
+    <Compile Include="Operations\Difference.cs" />
     <Compile Include="Operations\Dilation.cs" />
     <Compile Include="Operations\Erosion.cs" />
     <Compile Include="Operations\GreyScale.cs" />
