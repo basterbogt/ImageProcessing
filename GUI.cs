@@ -64,7 +64,7 @@ namespace ImageProcessing
 
             //Negative thresholding of the background
             //image.Apply(Operation.Operations.Opening);
-            image.Apply(Operation.Operations.Closing);
+            //image.Apply(Operation.Operations.Closing);
 
 
             //Display Image
