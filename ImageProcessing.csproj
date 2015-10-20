@@ -59,6 +59,7 @@
     <Compile Include="Operations\Closing.cs" />
     <Compile Include="Operations\Difference.cs" />
     <Compile Include="Operations\Dilation.cs" />
+    <Compile Include="Operations\Edges.cs" />
     <Compile Include="Operations\Erosion.cs" />
     <Compile Include="Operations\GreyScale.cs" />
     <Compile Include="Operations\Negative.cs" />
