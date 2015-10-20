@@ -34,7 +34,9 @@ namespace ImageProcessing.Operations
 
         public static Color CreateColorFromGrayValue(int value)
         {
-            if (value < 0 || value > 255) throw new Exception("Out of range");
+            if (value < 0) value = 0;
+            if (value > 255) value = 255;
+            //if (value < 0 || value > 255) throw new Exception("Out of range");
             return Color.FromArgb(Convert.ToInt32(value), Convert.ToInt32(value), Convert.ToInt32(value)); ;
         }
     }

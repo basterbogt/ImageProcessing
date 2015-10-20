@@ -76,6 +76,9 @@ namespace ImageProcessing
                 case Operation.Operations.Dilation:
                     new Dilation().Apply(this);
                     break;
+                case Operation.Operations.Edges:
+                    new Edges().Apply(this);
+                    break;
                 default:
                     throw new System.Exception("This operation doesn't exist!");
             }
