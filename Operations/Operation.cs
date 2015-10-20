@@ -52,7 +52,7 @@ namespace ImageProcessing.Operations
                         {
                             //Get the current kernel's position's color-value
                             int pixelColor = Image.GetPixelColor(kernelStartPositionX + k, kernelStartPositionY + l);
-                            ColourValue += (pixelColor * (kernel.GetValue(l, k) * kernel.multiplier)); //calculates the value that has to be added, based on the kernel value and multiplier
+                            ColourValue += (pixelColor * (kernel.GetValue(k, l) * kernel.multiplier)); //calculates the value that has to be added, based on the kernel value and multiplier
                         }
                     }
 
