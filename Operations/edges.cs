@@ -66,7 +66,7 @@ namespace ImageProcessing.Operations
             //TODO merge all edge images
 
 
-            //convolve extra for thicker lines
+            //convolve extra step for thicker lines
             //kernel.SetKernelValues(0, 1, 0, 1, -4, 1, 0, 1, 0);
             //ApplyKernel(Image, kernel);
 
