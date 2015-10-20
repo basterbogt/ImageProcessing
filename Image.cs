@@ -36,7 +36,7 @@ namespace ImageProcessing
 
         public void SetPixels(int[,] image)
         {
-            this.pixelArray = image;
+            this.pixelArray = (int[,])image.Clone();
         }
         public int[,] GetPixels()
         {
