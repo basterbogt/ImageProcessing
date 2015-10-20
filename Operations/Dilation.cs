@@ -48,7 +48,7 @@ namespace ImageProcessing.Operations
                     {
                         for (int l = 0; l < structureHeight; l++)
                         {
-                            bool structureValue = structure.GetValue(l, k);
+                            bool structureValue = structure.GetValue(k, l);
                             if (!structureValue) continue;
 
                             int posX = structureStartPositionX + k;

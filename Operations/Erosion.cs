@@ -46,9 +46,12 @@ namespace ImageProcessing.Operations
                     bool pixelEnabled = true;
 
                     //checks if the structure isn't out of bounce
-                    if (structureStartPositionX < 0 || structureStartPositionY < 0) continue;
-                    if (structureStartPositionX + structureWidth > Image.Size.Width || structureStartPositionY + structureHeight > Image.Size.Height) continue;
-                    //todo: change code so it will do something other then just 'not'changing the pixel, when the structure is ou tof bounce
+                    if ((structureStartPositionX < 0 || structureStartPositionY < 0) ||
+                     (structureStartPositionX + structureWidth > Image.Size.Width || structureStartPositionY + structureHeight > Image.Size.Height))
+                    {
+                        newPixels[x, y] = Image.White;
+                        continue;
+                    }
 
                     //Loop through the structure
                     for (int k = 0; k < structureWidth; k++)
@@ -57,7 +60,7 @@ namespace ImageProcessing.Operations
                         {
                             //Get the current structure's position's color-value
                             int pixelColor = Image.GetPixelColor(structureStartPositionX + k, structureStartPositionY + l);
-                            bool structureValue = structure.GetValue(l, k);
+                            bool structureValue = structure.GetValue(k, l);
 
                             if (structureValue)
                             {
