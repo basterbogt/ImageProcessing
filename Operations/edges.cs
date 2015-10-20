@@ -19,13 +19,13 @@ namespace ImageProcessing.Operations
             kernel.SetKernelValues(-1, -2, -1,
                                     0,  0,  0,
                                     1,  2,  1);
-            //ApplyKernel(Image, kernel);
+            ApplyKernel(Image, kernel);
 
             //edge 2
-            kernel.SetKernelValues(-1, 0, 1, 
-                                   -2, 0, 2, 
-                                   -1, 0, 1);
-            ApplyKernel(Image, kernel);
+            //kernel.SetKernelValues(-1, 0, 1, 
+            //                       -2, 0, 2, 
+            //                       -1, 0, 1);
+            //ApplyKernel(Image, kernel);
 
 
             //TODO merge all edge images
