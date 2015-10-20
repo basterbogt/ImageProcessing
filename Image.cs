@@ -30,8 +30,8 @@ namespace ImageProcessing
 
         public Image(int[,] pixelArray, Size size)
         {
-            this.pixelArray = pixelArray;
-            this.Size = Size;
+            this.pixelArray = (int[,])pixelArray.Clone();
+            this.Size = size;
         }
 
         public void SetPixels(int[,] image)
