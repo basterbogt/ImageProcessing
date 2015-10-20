@@ -30,13 +30,13 @@ namespace ImageProcessing
 
         public Image(int[,] pixelArray, Size size)
         {
-            this.pixelArray = pixelArray;
-            this.Size = Size;
+            this.pixelArray = (int[,])pixelArray.Clone();
+            this.Size = size;
         }
 
         public void SetPixels(int[,] image)
         {
-            this.pixelArray = image;
+            this.pixelArray = (int[,])image.Clone();
         }
         public int[,] GetPixels()
         {
@@ -75,6 +75,9 @@ namespace ImageProcessing
                     break;
                 case Operation.Operations.Dilation:
                     new Dilation().Apply(this);
+                    break;
+                case Operation.Operations.Edges:
+                    new Edges().Apply(this);
                     break;
                 default:
                     throw new System.Exception("This operation doesn't exist!");

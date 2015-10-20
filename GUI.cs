@@ -9,6 +9,9 @@ namespace ImageProcessing
     {
         private Bitmap InputImage;
         private Bitmap OutputImage;
+        private int currentStep = 0;
+
+        private Image image;
 
         public GUI()
         {
@@ -27,19 +30,34 @@ namespace ImageProcessing
                     InputImage.Size.Height > 512 || InputImage.Size.Width > 512) // Dimension check
                     MessageBox.Show("Error in image dimensions (have to be > 0 and <= 512)");
                 else
-                    pictureBox1.Image = (System.Drawing.Image) InputImage;                 // Display input image
+                {
+                    image = null;
+                    if (OutputImage != null)
+                    {
+                        OutputImage.Dispose();
+                        OutputImage = null;
+                    }
+                    DisplayInputImage();                 // Display input image
+                    currentStep = 0;
+                    pictureBox2.Image = null;
+                    this.Text = "Press 'apply' to start!";
+                }
             }
         }
 
         private void applyButton_Click(object sender, EventArgs e)
         {
             if (InputImage == null) return;                                 // Get out if no input image
-            if (OutputImage != null) OutputImage.Dispose();                 // Reset output image
+            if (OutputImage != null)
+            {
+                InputImage.Dispose();
+                InputImage = OutputImage;
+                OutputImage = null;
+                //DisplayInputImage();
+            }
             OutputImage = new Bitmap(InputImage.Size.Width, InputImage.Size.Height); // Create new output image
 
-            Image image = new Image(InputImage);
 
-            
             /**********************/
             /* Setup progress bar */
             /**********************/
@@ -52,27 +70,44 @@ namespace ImageProcessing
             // TODO: include here your own code
             // Todo: Remove this code from the fucking GUI and put logic elsewhere...
 
-            // create a grayscale image
-            //image.Apply(Image.Operations.GreyScale);
-            image.Apply(Operation.Operations.Smoothing);
 
-            //Find Highest/Lowest Value
-            //FindHighestLowestValue(Image);
-
-            //Negative thresholding of the background
-            image.Apply(Operation.Operations.NegativeThreshold);
-
-            //Negative thresholding of the background
-            //image.Apply(Operation.Operations.Opening);
-            //image.Apply(Operation.Operations.Closing);
+            ProcessImage();
 
 
-            //Display Image
-            DisplayOutputImage(image);
 
             //==========================================================================================
 
 
+        }
+
+        private void ProcessImage()
+        {
+            switch (currentStep)
+            {
+                case 0:
+                    this.Text = "GrayValue";
+                    this.image = new Image(InputImage);
+                    break;
+                case 1:
+                    this.Text = "Smoothing";
+                    image.Apply(Operation.Operations.Smoothing);
+                    break;
+                case 2:
+                    this.Text = "Negative Threshold";
+                    image.Apply(Operation.Operations.NegativeThreshold);
+                    break;
+                case 3:
+                    this.Text = "Edges";
+                    image.Apply(Operation.Operations.Edges);
+                    break;
+                default:
+                    this.Text = "Done";
+                    return;
+            }
+
+            currentStep++;
+            //Display Image
+            DisplayOutputImage(image);
         }
 
 
@@ -117,15 +152,21 @@ namespace ImageProcessing
         //    }
         //}
 
-        
+
+
+
+        private void DisplayInputImage()
+        {
+            pictureBox1.Image = (System.Drawing.Image)InputImage;                 // Display input image
+        }
 
 
         private void DisplayOutputImage(Image Image)
         {
             // Copy array to output Bitmap
-            for (int x = 0; x < InputImage.Size.Width; x++)
+            for (int x = 0; x < OutputImage.Size.Width; x++)
             {
-                for (int y = 0; y < InputImage.Size.Height; y++)
+                for (int y = 0; y < OutputImage.Size.Height; y++)
                 {
                     OutputImage.SetPixel(x, y, GreyScale.CreateColorFromGrayValue(Image.GetPixelColor(x, y)));               // Set the pixel color at coordinate (x,y)
                 }
