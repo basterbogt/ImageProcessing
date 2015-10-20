@@ -23,13 +23,22 @@ namespace ImageProcessing.Operations
 
             int[,] newPixels = new int[original.Size.Width, original.Size.Height];
 
+            //initialise image
+            for (int x = 0; x < original.Size.Width; x++)
+            {
+                for (int y = 0; y < original.Size.Height; y++)
+                {
+                    newPixels[x, y] = Image.White;
+                }
+            }
+                    
             //Loop through the image
             for (int x = 0; x < toBeReconstructedImage.Size.Width; x++)
             {
                 for (int y = 0; y < toBeReconstructedImage.Size.Height; y++)
                 {
                     //if there is a pixel marked on the 'toBeReconstructedImage', reconstruct that object based on the original image's pixels:
-                    if (toBeReconstructedImage.GetPixelColor(x, y) == Image.Black)
+                    if (currentPixelsImg2[x,y] == Image.Black)
                         ColorNeightbours(x, y, original.Size, ref currentPixelsImg1, ref newPixels);
 
                 }
@@ -51,27 +60,16 @@ namespace ImageProcessing.Operations
             //Get pixel left: (x-1, y)
             ColorNeightbours(x - 1, y, size, ref original, ref result);
 
-            //Get pixel top-left: (x-1, y-1)
-            ColorNeightbours(x - 1, y -1, size, ref original, ref result);
-
             //Get pixel top: (x, y-1)
-            ColorNeightbours(x , y - 1, size, ref original, ref result);
+            ColorNeightbours(x, y - 1, size, ref original, ref result);
 
-            //Get pixel top-right: (x+1, y-1)
-            ColorNeightbours(x + 1, y - 1, size, ref original, ref result);
-
-            //Get pixel right: (x+1, y)
+            ////Get pixel right: (x+1, y)
             ColorNeightbours(x + 1, y, size, ref original, ref result);
 
-            //Get pixel bottom-right: (x+1, y+1)
-            ColorNeightbours(x + 1, y +1, size, ref original, ref result);
-
-            //Get pixel bottom: (x, y+1)
-            ColorNeightbours(x, y +1, size, ref original, ref result);
-
-            //Get pixel bottom-left: (x-1, y+1)
-            ColorNeightbours(x - 1, y + 1, size, ref original, ref result);
+            ////Get pixel bottom: (x, y+1)
+            //ColorNeightbours(x, y + 1, size, ref original, ref result);
             
+
         }
 
 

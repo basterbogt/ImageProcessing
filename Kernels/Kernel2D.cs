@@ -30,7 +30,7 @@ namespace ImageProcessing.Kernels
                 array[row] = new double[newKernelSize];
                 for (int column = 0; column < kernelSize.Width; column++)
                 {
-                    array[row][column] = values[((row + 1) * (column + 1)) - 1]; //adding 1 to get actual number, removing 1 to get the index number of that number
+                    array[row][column] = values[((row * kernelSize.Width) + column)];
                 }
             }
         }
