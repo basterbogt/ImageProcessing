@@ -100,7 +100,7 @@ namespace ImageProcessing
                     //image = Addition.Apply(image, temp);
                     image = new Image(image.GetPixels(), image.Size);
 
-                    image = Difference.Apply(image, temp);
+                    image = Minval.Apply(image, temp);
                     break;
                 case 3:
                     this.Text = "Negative Threshold";
