@@ -16,6 +16,8 @@
             Image.Apply(Operation.Operations.Erosion);
             Image.Apply(Operation.Operations.Erosion);
             Image.Apply(Operation.Operations.Erosion);
+            Image.Apply(Operation.Operations.Erosion);
+            Image.Apply(Operation.Operations.Erosion);
 
             Image.SetPixels(Reconstruction.Apply(original, Image).GetPixels());
 

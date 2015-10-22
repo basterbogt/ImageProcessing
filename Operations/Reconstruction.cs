@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -48,30 +49,50 @@ namespace ImageProcessing.Operations
             
         }
 
-        public static void ColorNeightbours(int x, int y, Size size, ref int[,] original, ref int[,] result)
+        public static void ColorNeightbours(int X, int Y, Size size, ref int[,] original, ref int[,] result)
         {
-            if (x < 0 || x >= size.Width || y < 0 || y >= size.Height) return;//Out of bounce
-            
-            if (original[x, y] == Image.White) return;//If original is white then dont fill it in and quit looking at neighbours
-            if (result[x, y] == Image.Black) return;//If this pixel has already been filled in and been looped through, dont continue and cause stack overflows!
+            Stack<Coordinate> list = new Stack<Coordinate>();
+            list.Push(new Coordinate(X, Y));
 
-            result[x, y] = Image.Black;
+            while(list.Count > 0)
+            {
+                Coordinate currentCoordinate = list.Pop();
+                int x = currentCoordinate.x;
+                int y = currentCoordinate.y;
 
-            //Get pixel left: (x-1, y)
-            ColorNeightbours(x - 1, y, size, ref original, ref result);
+                if (!LegitPixel(x, y, size, ref original, ref result)) continue;
 
-            //Get pixel top: (x, y-1)
-            ColorNeightbours(x, y - 1, size, ref original, ref result);
+                result[x, y] = Image.Black;
+                if (LegitPixel(x - 1, y, size, ref original, ref result))
+                    list.Push(new Coordinate(x - 1, y));
+                if (LegitPixel(x, y -1, size, ref original, ref result))
+                    list.Push(new Coordinate(x , y - 1));
+                if (LegitPixel(x +1, y, size, ref original, ref result))
+                    list.Push(new Coordinate(x + 1, y));
+                if (LegitPixel(x, y+ 1, size, ref original, ref result))
+                    list.Push(new Coordinate(x , y +1));
+                
+            }
+        }
 
-            ////Get pixel right: (x+1, y)
-            ColorNeightbours(x + 1, y, size, ref original, ref result);
-
-            ////Get pixel bottom: (x, y+1)
-            //ColorNeightbours(x, y + 1, size, ref original, ref result);
-            
-
+        private static bool LegitPixel(int x, int y, Size size, ref int[,] original, ref int[,] result)
+        {
+            if (x < 0 || x >= size.Width || y < 0 || y >= size.Height) return false;    //Out of bounce
+            if (original[x, y] == Image.White) return false;        //If original is white then dont fill it in and quit looking at neighbours
+            if (result[x, y] == Image.Black) return false;          //If this pixel has already been filled in and been looped through, dont continue and cause stack overflows!
+            return true;
         }
 
 
+    }
+    public struct Coordinate
+    {
+        public int x, y;
+
+        public Coordinate(int p1, int p2)
+        {
+            x = p1;
+            y = p2;
+        }
     }
 }
