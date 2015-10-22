@@ -92,11 +92,11 @@ namespace ImageProcessing
                     this.Text = "Smoothing";
                     image.Apply(Operation.Operations.Smoothing);
                     break;
-                case 2:
+                case 3:
                     this.Text = "Negative Threshold";
                     image.Apply(Operation.Operations.NegativeThreshold);
                     break;
-                case 3:
+                case 2:
                     this.Text = "Edges";
                     image.Apply(Operation.Operations.Edges);
                     break;

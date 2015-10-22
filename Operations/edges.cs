@@ -22,10 +22,10 @@ namespace ImageProcessing.Operations
             //ApplyKernel(Image, kernel);
 
             //edge 2
-            kernel.SetKernelValues(-2, -1, 0,
-                                   -1, 0, 1,
-                                   0, 1, 2);
-            ApplyKernel(Image, kernel);
+            //kernel.SetKernelValues(-2, -1, 0,
+            //                       -1, 0, 1,
+            //                      0, 1, 2);
+            //ApplyKernel(Image, kernel);
 
             //edge 3
             //kernel.SetKernelValues(-1, -2, -1,
@@ -67,8 +67,10 @@ namespace ImageProcessing.Operations
 
 
             //convolve extra step for thicker lines
-            //kernel.SetKernelValues(0, 1, 0, 1, -4, 1, 0, 1, 0);
-            //ApplyKernel(Image, kernel);
+            kernel.SetKernelValues(1, 2, 1,
+                                   2,-12, 2, 
+                                   1, 2, 1);
+            ApplyKernel(Image, kernel);
 
         }
 
