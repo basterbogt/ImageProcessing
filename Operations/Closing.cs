@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace ImageProcessing.Operations
+﻿namespace ImageProcessing.Operations
 {
     public class Closing: Operation
     {
@@ -17,12 +12,15 @@ namespace ImageProcessing.Operations
 
             Image original = new Image(Image.GetPixels(), Image.Size);
 
-
-            //while (copy.GetPixels() != Image.GetPixels()) //While we aren't done doing the erosion -> this is still wrongly implemented
+            int intensity = 1;
+            
+            //Apply Dilation
+            for(int i = 0; i < intensity; i++)
             Image.Apply(Operation.Operations.Dilation);
-            Image.Apply(Operation.Operations.Dilation);
 
-            Image.SetPixels(Reconstruction.Apply(original, Image).GetPixels());
+            //Apply Erosion
+            for (int i = 0; i < intensity; i++)
+                Image.Apply(Operation.Operations.Erosion);
 
         }
     }

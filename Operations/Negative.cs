@@ -9,7 +9,7 @@ namespace ImageProcessing.Operations
 
         }
 
-        public override void Apply(Image Image)
+        public override void Apply(Image image)
         {
             //for (int x = 0; x < Image.Size.Width; x++)
             //{

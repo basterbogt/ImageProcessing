@@ -51,7 +51,7 @@ namespace ImageProcessing.Operations
 
         public static void ColorNeightbours(int X, int Y, Size size, ref int[,] original, ref int[,] result)
         {
-            Stack<Coordinate> list = new Stack<Coordinate>();
+            Stack<Coordinate> list = new Stack<Coordinate>(); //Using a new stack, combined with an iterative way to loop through the nearby pixels, to prevent stackoverflow error
             list.Push(new Coordinate(X, Y));
 
             while(list.Count > 0)
@@ -62,7 +62,9 @@ namespace ImageProcessing.Operations
 
                 if (!LegitPixel(x, y, size, ref original, ref result)) continue;
 
-                result[x, y] = Image.Black;
+                result[x, y] = Image.Black; //Color the current pixel
+
+                //Loop through neighbours. Ignoring diagonal neighbours. They will be visited indirectly...
                 if (LegitPixel(x - 1, y, size, ref original, ref result))
                     list.Push(new Coordinate(x - 1, y));
                 if (LegitPixel(x, y -1, size, ref original, ref result))
@@ -75,6 +77,7 @@ namespace ImageProcessing.Operations
             }
         }
 
+        
         private static bool LegitPixel(int x, int y, Size size, ref int[,] original, ref int[,] result)
         {
             if (x < 0 || x >= size.Width || y < 0 || y >= size.Height) return false;    //Out of bounce

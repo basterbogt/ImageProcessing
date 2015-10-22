@@ -7,22 +7,22 @@
 
         }
 
-        public override void Apply(Image Image)
+        public override void Apply(Image image)
         {
-            Image original = new Image(Image.GetPixels(), Image.Size);
+            Image original = new Image(image.GetPixels(), image.Size);
+            
+            int intensity = 6;
+            
+            //Apply Erosion
+            for (int i = 0; i < intensity; i++)
+                image.Apply(Operation.Operations.Erosion);
 
-            //while (copy.GetPixels() != Image.GetPixels()) //While we aren't done doing the erosion -> this is still wrongly implemented
-                Image.Apply(Operation.Operations.Erosion);
-            Image.Apply(Operation.Operations.Erosion);
-            Image.Apply(Operation.Operations.Erosion);
-            Image.Apply(Operation.Operations.Erosion);
-            Image.Apply(Operation.Operations.Erosion);
-            Image.Apply(Operation.Operations.Erosion);
+            //Reconstruct image
+            int[,] newPixels = Reconstruction.Apply(original, image).GetPixels();
 
-            Image.SetPixels(Reconstruction.Apply(original, Image).GetPixels());
-
-
-
+            //Update image with new pixels:
+            image.SetPixels(newPixels);
+            
         }
     }
 }

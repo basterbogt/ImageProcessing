@@ -8,10 +8,10 @@ namespace ImageProcessing.Operations
         {
         }
 
-        public override void Apply(Image Image)
+        public override void Apply(Image image)
         {
             //TODO: keep start image in value
-            Image temp_img = Image;
+            Image temp_img = image;
 
             Kernel kernel = new Kernel2D(1.0f);
 
@@ -19,7 +19,7 @@ namespace ImageProcessing.Operations
             kernel.SetKernelValues(-1, -2, -1,
                                     0,  0,  0,
                                     1,  2,  1);
-            ApplyKernel(Image, kernel);
+            ApplyKernel(image, kernel);
 
             //edge 2
             //kernel.SetKernelValues(-1, 0, 1, 

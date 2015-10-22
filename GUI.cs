@@ -97,8 +97,12 @@ namespace ImageProcessing
                     image.Apply(Operation.Operations.NegativeThreshold);
                     break;
                 case 3:
-                    this.Text = "Edges";
-                    image.Apply(Operation.Operations.Edges);
+                    this.Text = "Opening";
+                    image.Apply(Operation.Operations.Opening);
+                    break;
+                case 4:
+                    this.Text = "Closing";
+                    image.Apply(Operation.Operations.Closing);
                     break;
                 default:
                     this.Text = "Done";

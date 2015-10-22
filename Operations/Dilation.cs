@@ -9,20 +9,30 @@ namespace ImageProcessing.Operations
 
         }
 
-        public override void Apply(Image Image)
+        public override void Apply(Image image)
         {
 
             Structure structure = new Structure2D();
             structure.SetValues(1, 1, 1, 1, 1, 1, 1, 1, 1);
 
-            ApplyDilation(Image, structure);
+            ApplyDilation(image, structure);
         }
 
 
-        public void ApplyDilation(Image Image, Structure structure)
+        public void ApplyDilation(Image image, Structure structure)
         {
-            int[,] currentPixels = Image.GetPixels();
-            int[,] newPixels = new int[Image.Size.Width, Image.Size.Height];
+            int[,] currentPixels = image.GetPixels();
+            int[,] newPixels = new int[image.Size.Width, image.Size.Height];
+
+            //initialise image
+            for (int x = 0; x < image.Size.Width; x++)
+            {
+                for (int y = 0; y < image.Size.Height; y++)
+                {
+
+                    newPixels[x, y] = Image.White;//Default White value
+                }
+            }
 
             //structure information
             int structureWidth = structure.StructureSize.Width;
@@ -31,13 +41,12 @@ namespace ImageProcessing.Operations
             int middelPixelIndexHeight = structureHeight / 2;
 
             //Loop through the image
-            for (int x = 0; x < Image.Size.Width; x++)
+            for (int x = 0; x < image.Size.Width; x++)
             {
-                for (int y = 0; y < Image.Size.Height; y++)
+                for (int y = 0; y < image.Size.Height; y++)
                 {
-                    newPixels[x, y] = Image.White;//Default White value
 
-                    if (Image.GetPixelColor(x, y) > Image.Gray) continue;
+                    if (image.GetPixelColor(x, y) == Image.White) continue;
 
                     //Determin structure's position, based on current pixel
                     int structureStartPositionX = x - middelPixelIndexWidth;
@@ -54,17 +63,16 @@ namespace ImageProcessing.Operations
                             int posX = structureStartPositionX + k;
                             int posY = structureStartPositionY + l;
                             
-                            if (posX >= 0 && posX < Image.Size.Width && posY >= 0 && posY < Image.Size.Height) //check for out of bounce
-                                 newPixels[posX, posY] = 0;
-
-
+                            if (posX >= 0 && posX < image.Size.Width && posY >= 0 && posY < image.Size.Height) //check for out of bounce
+                                 newPixels[posX, posY] = Image.Black;
+                            
                         }
                     }
                     
                 }
             }
 
-            Image.SetPixels(newPixels);
+            image.SetPixels(newPixels);
 
         }
     }
