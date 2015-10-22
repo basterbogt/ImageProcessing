@@ -6,27 +6,28 @@
         {
 
         }
-        public override void Apply(Image Image)
+        public override void Apply(Image image)
         {
-            int totalGrayValue = 0;
-            for (int x = 0; x < Image.Size.Width; x++)
+            int totalGrayValue = 0;//Start counter
+            for (int x = 0; x < image.Size.Width; x++)
             {
-                for (int y = 0; y < Image.Size.Height; y++)
+                for (int y = 0; y < image.Size.Height; y++)
                 {
-                    totalGrayValue += Image.GetPixelColor(x, y);
+                    totalGrayValue += image.GetPixelColor(x, y);
                 }
 
             }
-            int AverageGrayValue = (totalGrayValue > 0) ? totalGrayValue / (Image.Size.Width * Image.Size.Height) : 0;
 
-            for (int x = 0; x < Image.Size.Width; x++)
+            int AverageGrayValue = (totalGrayValue > 0) ? totalGrayValue / (image.Size.Width * image.Size.Height) : 0;
+
+            for (int x = 0; x < image.Size.Width; x++)
             {
-                for (int y = 0; y < Image.Size.Height; y++)
+                for (int y = 0; y < image.Size.Height; y++)
                 {
-                    int pixelColor = Image.GetPixelColor(x, y);                         // Get the pixel color at coordinate (x,y)
+                    int pixelColor = image.GetPixelColor(x, y);                         // Get the pixel color at coordinate (x,y)
                     //int threshold = 186;
-                    int updatedColor = (pixelColor > AverageGrayValue) ? 255 : 0;          // black or white
-                    Image.SetPixelColor(x, y, updatedColor);                              // Set the new pixel color at coordinate (x,y)
+                    int updatedColor = (pixelColor > AverageGrayValue) ? Image.White : Image.Black;          // black or white
+                    image.SetPixelColor(x, y, updatedColor);                              // Set the new pixel color at coordinate (x,y)
                 }
             }
         }

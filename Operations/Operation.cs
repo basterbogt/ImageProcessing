@@ -13,12 +13,12 @@ namespace ImageProcessing.Operations
 
         }
 
-        public abstract void Apply(Image Image);
+        public abstract void Apply(Image image);
 
-        public void ApplyKernel(Image Image, Kernel kernel)
+        public void ApplyKernel(Image image, Kernel kernel)
         {
-            int[,] currentPixels = Image.GetPixels();
-            int[,] newPixels = new int[Image.Size.Width, Image.Size.Height];
+            int[,] currentPixels = image.GetPixels();
+            int[,] newPixels = new int[image.Size.Width, image.Size.Height];
 
             //kernel information
             int kernelWidth = kernel.kernelSize.Width;
@@ -27,9 +27,9 @@ namespace ImageProcessing.Operations
             int middelPixelIndexHeight = kernelHeight / 2;
 
             //Loop through the image
-            for (int x = 0; x < Image.Size.Width; x++)
+            for (int x = 0; x < image.Size.Width; x++)
             {
-                for (int y = 0; y < Image.Size.Height; y++)
+                for (int y = 0; y < image.Size.Height; y++)
                 {
                     newPixels[x, y] = currentPixels[x, y];//current quickfix untill the proper kernel-out-of-bounce-code is implemented. This line adds an initial value of the current pixel, based on the original image.
 
@@ -42,7 +42,7 @@ namespace ImageProcessing.Operations
 
                     //checks if the kernel isn't out of bounce
                     if (kernelStartPositionX < 0 || kernelStartPositionY < 0) continue;
-                    if (kernelStartPositionX + kernel.kernelSize.Width > Image.Size.Width || kernelStartPositionY + kernel.kernelSize.Height > Image.Size.Height) continue;
+                    if (kernelStartPositionX + kernel.kernelSize.Width > image.Size.Width || kernelStartPositionY + kernel.kernelSize.Height > image.Size.Height) continue;
                     //todo: change code so it will do something other then just 'not'changing the pixel, when the kernel is ou tof bounce
 
                     //Loop through the kernel
@@ -51,7 +51,7 @@ namespace ImageProcessing.Operations
                         for (int l = 0; l < kernelHeight; l++)
                         {
                             //Get the current kernel's position's color-value
-                            int pixelColor = Image.GetPixelColor(kernelStartPositionX + k, kernelStartPositionY + l);
+                            int pixelColor = image.GetPixelColor(kernelStartPositionX + k, kernelStartPositionY + l);
                             ColourValue += (pixelColor * (kernel.GetValue(l, k) * kernel.multiplier)); //calculates the value that has to be added, based on the kernel value and multiplier
                         }
                     }
@@ -61,7 +61,7 @@ namespace ImageProcessing.Operations
                 }
             }
 
-            Image.SetPixels(newPixels);
+            image.SetPixels(newPixels);
 
 
         }

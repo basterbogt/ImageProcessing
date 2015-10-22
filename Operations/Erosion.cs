@@ -10,21 +10,21 @@ namespace ImageProcessing.Operations
         }
 
 
-        public override void Apply(Image Image)
+        public override void Apply(Image image)
         {
 
             Structure structure = new Structure2D();
             structure.SetValues(1, 1, 1, 1, 1, 1, 1, 1, 1);
 
-            ApplyErosion(Image, structure);
+            ApplyErosion(image, structure);
 
         }
 
 
-        public void ApplyErosion(Image Image, Structure structure)
+        public void ApplyErosion(Image image, Structure structure)
         {
-            int[,] currentPixels = Image.GetPixels();
-            int[,] newPixels = new int[Image.Size.Width, Image.Size.Height];
+            int[,] currentPixels = image.GetPixels();
+            int[,] newPixels = new int[image.Size.Width, image.Size.Height];
 
             //structure information
             int structureWidth = structure.StructureSize.Width;
@@ -33,9 +33,9 @@ namespace ImageProcessing.Operations
             int middelPixelIndexHeight = structureHeight / 2;
 
             //Loop through the image
-            for (int x = 0; x < Image.Size.Width; x++)
+            for (int x = 0; x < image.Size.Width; x++)
             {
-                for (int y = 0; y < Image.Size.Height; y++)
+                for (int y = 0; y < image.Size.Height; y++)
                 {
 
                     //Determin structure's position, based on current pixel
@@ -47,7 +47,7 @@ namespace ImageProcessing.Operations
 
                     //checks if the structure isn't out of bounce
                     if ((structureStartPositionX < 0 || structureStartPositionY < 0) ||
-                     (structureStartPositionX + structureWidth > Image.Size.Width || structureStartPositionY + structureHeight > Image.Size.Height))
+                     (structureStartPositionX + structureWidth > image.Size.Width || structureStartPositionY + structureHeight > image.Size.Height))
                     {
                         newPixels[x, y] = Image.White;
                         continue;
@@ -59,7 +59,7 @@ namespace ImageProcessing.Operations
                         for (int l = 0; l < structureHeight; l++)
                         {
                             //Get the current structure's position's color-value
-                            int pixelColor = Image.GetPixelColor(structureStartPositionX + k, structureStartPositionY + l);
+                            int pixelColor = image.GetPixelColor(structureStartPositionX + k, structureStartPositionY + l);
                             bool structureValue = structure.GetValue(k, l);
 
                             if (structureValue)
@@ -87,7 +87,7 @@ namespace ImageProcessing.Operations
                 }
             }
 
-            Image.SetPixels(newPixels);
+            image.SetPixels(newPixels);
 
         }
     }

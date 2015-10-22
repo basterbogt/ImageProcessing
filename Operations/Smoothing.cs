@@ -10,13 +10,13 @@ namespace ImageProcessing.Operations
         }
 
 
-        public override void Apply(Image Image)
+        public override void Apply(Image image)
         {
             Kernel kernel = new Kernel2D(1.0f / 9.0f);
             //kernel.SetKernelValues(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
             kernel.SetKernelValues(1, 1, 1, 1, 1, 1, 1, 1, 1);
 
-            ApplyKernel(Image, kernel);
+            ApplyKernel(image, kernel);
       
         }
     }
