@@ -1,4 +1,5 @@
-﻿using ImageProcessing.Operations;
+﻿using ImageProcessing.Filtering;
+using ImageProcessing.Operations;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -103,6 +104,14 @@ namespace ImageProcessing
                 case 4:
                     this.Text = "Closing";
                     image.Apply(Operation.Operations.Closing);
+                    break;
+                case 5:
+                    this.Text = "Colouring";
+                    ObjectDetection od = new ObjectDetection(image);
+                    od.Apply();
+                    ObjectFiltering of = new ObjectFiltering(od.objects);
+                    of.Apply();
+                    image = new Coloring(of.coffeeMugObjectList).ConstructNewImage(image.Size);
                     break;
                 default:
                     this.Text = "Done";
