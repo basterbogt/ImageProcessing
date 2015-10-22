@@ -15,8 +15,8 @@
                 {
                     totalGrayValue += Image.GetPixelColor(x, y);
                 }
-
             }
+
             int AverageGrayValue = (totalGrayValue > 0) ? totalGrayValue / (Image.Size.Width * Image.Size.Height) : 0;
 
             for (int x = 0; x < Image.Size.Width; x++)

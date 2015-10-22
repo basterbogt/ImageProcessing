@@ -92,13 +92,19 @@ namespace ImageProcessing
                     this.Text = "Smoothing";
                     image.Apply(Operation.Operations.Smoothing);
                     break;
+                case 2:
+                    this.Text = "Edges + subtraction";
+                    Image temp = new Image(image.GetPixels(), image.Size);
+                    image.Apply(Operation.Operations.Edges);  
+
+                    //image = Addition.Apply(image, temp);
+                    image = new Image(image.GetPixels(), image.Size);
+
+                    image = Difference.Apply(image, temp);
+                    break;
                 case 3:
                     this.Text = "Negative Threshold";
                     image.Apply(Operation.Operations.NegativeThreshold);
-                    break;
-                case 2:
-                    this.Text = "Edges";
-                    image.Apply(Operation.Operations.Edges);
                     break;
                 default:
                     this.Text = "Done";

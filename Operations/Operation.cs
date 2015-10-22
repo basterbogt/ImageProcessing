@@ -55,21 +55,10 @@ namespace ImageProcessing.Operations
                             ColourValue += (pixelColor * (kernel.GetValue(k, l) * kernel.multiplier)); //calculates the value that has to be added, based on the kernel value and multiplier
                         }
                     }
-
-                    newPixels[x, y] = (int)(ColourValue); //sets new value
-                    
+                    newPixels[x, y] = (int)(ColourValue); //sets new value  
                 }
             }
-
             Image.SetPixels(newPixels);
-
-
         }
-
-
-
-
-
-
     }
 }
