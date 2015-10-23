@@ -95,22 +95,26 @@ namespace ImageProcessing
                     break;
                 case 2:
                     this.Text = "Edges + subtraction";
+                    image.Apply(Operation.Operations.Inverse);
                     Image temp = new Image(image.GetPixels(), image.Size);
-                    image.Apply(Operation.Operations.Edges);  
+                    image.Apply(Operation.Operations.Edges);
+                    image.Apply(Operation.Operations.NegativeThreshold);
+                        
+                   // image = Addition.Apply(image, temp);
+                   // image = new Image(image.GetPixels(), image.Size);
 
-                    //image = Addition.Apply(image, temp);
-                    image = new Image(image.GetPixels(), image.Size);
-
-                    image = Minval.Apply(image, temp);
+                    //image = Minval.Apply(image, temp);
+                    
                     break;
                 case 3:
-<<<<<<< HEAD
                     this.Text = "Opening";
-                    image.Apply(Operation.Operations.Opening);
+                    image.Apply(Operation.Operations.NegativeThreshold);
+                    
+                    //image.Apply(Operation.Operations.Closing);
                     break;
                 case 4:
                     this.Text = "Closing";
-                    image.Apply(Operation.Operations.Closing);
+                    image.Apply(Operation.Operations.Opening);
                     break;
                 case 5:
                     this.Text = "Colouring";
@@ -119,10 +123,7 @@ namespace ImageProcessing
                     ObjectFiltering of = new ObjectFiltering(od.objects);
                     of.Apply();
                     image = new Coloring(of.coffeeMugObjectList).ConstructNewImage(image.Size);
-=======
-                    this.Text = "Negative Threshold";
-                    image.Apply(Operation.Operations.NegativeThreshold);
->>>>>>> refs/remotes/origin/Koen-Edges
+                    image = new Image(image.GetPixels(), image.Size);
                     break;
                 default:
                     this.Text = "Done";

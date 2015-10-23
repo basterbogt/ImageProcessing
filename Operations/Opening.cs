@@ -11,7 +11,7 @@
         {
             Image original = new Image(image.GetPixels(), image.Size);
             
-            int intensity = 6;
+            int intensity = 2;
             
             //Apply Erosion
             for (int i = 0; i < intensity; i++)

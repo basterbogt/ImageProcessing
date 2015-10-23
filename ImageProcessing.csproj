@@ -62,6 +62,7 @@
     <Compile Include="Kernels\Kernel1D.cs" />
     <Compile Include="Kernels\Kernel2D.cs" />
     <Compile Include="Kernels\Kernel.cs" />
+    <Compile Include="Operations\Inverse.cs" />
     <Compile Include="Operations\Minval.cs" />
     <Compile Include="Operations\Maxval.cs" />
     <Compile Include="Operations\Average.cs" />

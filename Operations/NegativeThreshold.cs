@@ -16,11 +16,6 @@
                     totalGrayValue += image.GetPixelColor(x, y);
                 }
             }
-<<<<<<< HEAD
-=======
-
-            int AverageGrayValue = (totalGrayValue > 0) ? totalGrayValue / (Image.Size.Width * Image.Size.Height) : 0;
->>>>>>> refs/remotes/origin/Koen-Edges
 
             int AverageGrayValue = (totalGrayValue > 0) ? totalGrayValue / (image.Size.Width * image.Size.Height) : 0;
 

@@ -12,7 +12,7 @@
 
             Image original = new Image(Image.GetPixels(), Image.Size);
 
-            int intensity = 1;
+            int intensity = 4;
             
             //Apply Dilation
             for(int i = 0; i < intensity; i++)
