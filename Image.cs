@@ -5,6 +5,7 @@ namespace ImageProcessing
 {
     public class Image
     {
+        public static int TotalGrayValues = 256;
         public static int White = 255;
         public static int Black = 0;
         public static int Gray = 128;

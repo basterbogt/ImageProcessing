@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Filtering\Area.cs" />
+    <Compile Include="Filtering\Coloring.cs" />
+    <Compile Include="Filtering\Filter.cs" />
+    <Compile Include="Filtering\Object.cs" />
+    <Compile Include="Filtering\ObjectDetection.cs" />
+    <Compile Include="Filtering\Roundness.cs" />
     <Compile Include="GUI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,6 +81,7 @@
     <Compile Include="Operations\Smoothing.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Filtering\ObjectFiltering.cs" />
     <Compile Include="Structures\Structure.cs" />
     <Compile Include="Structures\Structure1D.cs" />
     <Compile Include="Structures\Structure2D.cs" />

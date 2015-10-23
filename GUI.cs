@@ -1,4 +1,5 @@
-﻿using ImageProcessing.Operations;
+﻿using ImageProcessing.Filtering;
+using ImageProcessing.Operations;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -103,8 +104,25 @@ namespace ImageProcessing
                     image = Minval.Apply(image, temp);
                     break;
                 case 3:
+<<<<<<< HEAD
+                    this.Text = "Opening";
+                    image.Apply(Operation.Operations.Opening);
+                    break;
+                case 4:
+                    this.Text = "Closing";
+                    image.Apply(Operation.Operations.Closing);
+                    break;
+                case 5:
+                    this.Text = "Colouring";
+                    ObjectDetection od = new ObjectDetection(image);
+                    od.Apply();
+                    ObjectFiltering of = new ObjectFiltering(od.objects);
+                    of.Apply();
+                    image = new Coloring(of.coffeeMugObjectList).ConstructNewImage(image.Size);
+=======
                     this.Text = "Negative Threshold";
                     image.Apply(Operation.Operations.NegativeThreshold);
+>>>>>>> refs/remotes/origin/Koen-Edges
                     break;
                 default:
                     this.Text = "Done";
