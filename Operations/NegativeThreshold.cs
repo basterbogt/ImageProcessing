@@ -24,7 +24,7 @@
                 for (int y = 0; y < image.Size.Height; y++)
                 {
                     int pixelColor = image.GetPixelColor(x, y);                         // Get the pixel color at coordinate (x,y)
-                    //int threshold = 186;
+                    //AverageGrayValue = 210;
                     int updatedColor = (pixelColor > AverageGrayValue) ? Image.White : Image.Black;          // black or white
                     image.SetPixelColor(x, y, updatedColor);                              // Set the new pixel color at coordinate (x,y)
                 }
