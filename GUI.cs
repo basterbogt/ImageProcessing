@@ -94,10 +94,17 @@ namespace ImageProcessing
                     image.Apply(Operation.Operations.Smoothing);
                     break;
                 case 2:
-                    this.Text = "Negative Threshold";
-                    image.Apply(Operation.Operations.NegativeThreshold);
+                    this.Text = "Edges + subtraction";
+                    Image temp = new Image(image.GetPixels(), image.Size);
+                    image.Apply(Operation.Operations.Edges);  
+
+                    //image = Addition.Apply(image, temp);
+                    image = new Image(image.GetPixels(), image.Size);
+
+                    image = Minval.Apply(image, temp);
                     break;
                 case 3:
+<<<<<<< HEAD
                     this.Text = "Opening";
                     image.Apply(Operation.Operations.Opening);
                     break;
@@ -112,6 +119,10 @@ namespace ImageProcessing
                     ObjectFiltering of = new ObjectFiltering(od.objects);
                     of.Apply();
                     image = new Coloring(of.coffeeMugObjectList).ConstructNewImage(image.Size);
+=======
+                    this.Text = "Negative Threshold";
+                    image.Apply(Operation.Operations.NegativeThreshold);
+>>>>>>> refs/remotes/origin/Koen-Edges
                     break;
                 default:
                     this.Text = "Done";
