@@ -8,7 +8,6 @@ namespace ImageProcessing.Filtering
     public class ObjectDetection
     {
         private Image originalImage;
-        private Image image;
         public List<Object> objects { get; private set; }
 
         public ObjectDetection(Image image)

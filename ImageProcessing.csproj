@@ -51,6 +51,7 @@
     <Compile Include="Filtering\Filter.cs" />
     <Compile Include="Filtering\Object.cs" />
     <Compile Include="Filtering\ObjectDetection.cs" />
+    <Compile Include="Filtering\ObjectMath.cs" />
     <Compile Include="Filtering\Roundness.cs" />
     <Compile Include="GUI.cs">
       <SubType>Form</SubType>
