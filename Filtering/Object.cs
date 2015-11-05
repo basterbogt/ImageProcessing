@@ -5,17 +5,38 @@ using System.Text;
 
 namespace ImageProcessing.Filtering
 {
-    public class Object
+    public partial class Object
     {
         public int xOnOriginalImage { get; private set; }
         public int yOnOriginalImage { get; private set; }
 
         public Image image;
 
+
         public Object(Image image)
         {
             Trim(image);
+            CalculateValues();
         }
+
+        private void CalculateValues()
+        {
+
+            CalculateArea();
+            CalculatePerimeter();
+            CalculateCompactness();
+            CalculateLongestChordLength();
+            CalculateLongestChordOrientation();
+            CalculateLongestPerpendicularChord();
+            CalculateEccentricity();
+            CalculateMinimalBoundingBoxArea();
+            CalculateRectangularity();
+            CalculateElongation();
+            CalculateElongation2();
+            CalculateCurvature();
+            CalculateBendingEnergy();
+        }
+
 
         /// <summary>
         /// Trim image:
