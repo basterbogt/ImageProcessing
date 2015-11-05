@@ -83,6 +83,9 @@ namespace ImageProcessing
                 case Operation.Operations.Inverse:
                     new Inverse().Apply(this);
                     break;
+                case Operation.Operations.Gaussian:
+                    new Gaussian().Apply(this);
+                    break;
                 default:
                     throw new System.Exception("This operation doesn't exist!");
             }
