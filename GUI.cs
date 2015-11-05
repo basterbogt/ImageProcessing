@@ -89,41 +89,55 @@ namespace ImageProcessing
                     this.Text = "GrayValue";
                     this.image = new Image(InputImage);
                     break;
+
                 case 1:
                     this.Text = "Smoothing";
-                    image.Apply(Operation.Operations.Smoothing);
+                    image.Apply(Operation.Operations.Gaussian);
+                    image.Apply(Operation.Operations.Gaussian);
                     break;
+
                 case 2:
                     this.Text = "Edges";
-                    //image.Apply(Operation.Operations.Inverse);
                     
 
                     //image.Apply(Operation.Operations.Edges);
                     image.Apply(Operation.Operations.NegativeThreshold);
 
-                    Image temp = new Image(image.GetPixels(), image.Size);
-
+                    image.Apply(Operation.Operations.Opening);
                     image.Apply(Operation.Operations.Opening);
 
+                    Image temp = new Image(image.GetPixels(), image.Size);
+                    
                     image = new Image(image.GetPixels(), image.Size);
 
-                    // image = Addition.Apply(image, temp);
-                    image = Difference.Apply(image, temp);
-                   
+                    //image = Addition.Apply(image, temp);
+                    //image = Difference.Apply(image, temp);
+
+                    
 
                     //Image image2 = Maxval.Apply(new Image(image.GetPixels(), image.Size), temp);
                     image = new Image(image.GetPixels(), image.Size);
                     break;
+
                 case 3:
-                    this.Text = "neg tresh";
-                    image.Apply(Operation.Operations.NegativeThreshold);
-                    
+                    this.Text = "Dilation";
+
+                    //deze inverse moet een toggle hebben voor licht of donker van het plaatje
+                    image.Apply(Operation.Operations.Inverse);
+
                     image.Apply(Operation.Operations.Dilation);
+                    image.Apply(Operation.Operations.Dilation);
+                    image.Apply(Operation.Operations.Dilation);
+                    image.Apply(Operation.Operations.Dilation);
+
+                    image.Apply(Operation.Operations.Inverse);
                     break;
+
                 case 4:
                     this.Text = "opening";
                     image.Apply(Operation.Operations.Opening);
                     break;
+
                 case 5:
                     this.Text = "Colouring";
                     ObjectDetection od = new ObjectDetection(image);
@@ -133,6 +147,7 @@ namespace ImageProcessing
                     image = new Coloring(of.coffeeMugObjectList).ConstructNewImage(image.Size);
                     image = new Image(image.GetPixels(), image.Size);
                     break;
+
                 default:
                     this.Text = "Done";
                     return;
@@ -166,7 +181,6 @@ namespace ImageProcessing
             progressBar.Visible = false;                                    // Hide progress bar
         }
 
-
         //private void FindHighestLowestValue(ref Image Image)
         //{
         //    //lowest / highest result
@@ -185,14 +199,10 @@ namespace ImageProcessing
         //    }
         //}
 
-
-
-
         private void DisplayInputImage()
         {
             pictureBox1.Image = (System.Drawing.Image)InputImage;                 // Display input image
         }
-
 
         private void DisplayOutputImage(Image Image)
         {
