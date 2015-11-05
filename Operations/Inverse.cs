@@ -15,7 +15,6 @@ namespace ImageProcessing.Operations
             {
                 for (int y = 0; y < image.Size.Height; y++)
                 {
-
                     image.SetPixelColor(x, y, Image.White - image.GetPixelColor(x, y));
                 }
             }

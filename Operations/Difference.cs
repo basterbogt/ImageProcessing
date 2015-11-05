@@ -11,27 +11,23 @@ namespace ImageProcessing.Operations
 
         public static Image Apply(Image img1, Image img2)
         {
-            //if (img1.Size.Width != img2.Size.Width || img1.Size.Height != img2.Size.Height) throw new Exception("Images dont match in size..");
-            
-            //int[,] currentPixelsImg1 = img1.GetPixels();
-            //int[,] currentPixelsImg2 = img2.GetPixels();
-            //int[,] newPixels = new int[img1.Size.Width, img1.Size.Height];
+            Image newImg = new Image(img1.GetPixels(), img1.Size);
 
-            for (int x = 0; x < img1.Size.Width; x++)
+            for (int x = 0; x < newImg.Size.Width; x++)
             {
-                for (int y = 0; y < img1.Size.Height; y++)
+                for (int y = 0; y < newImg.Size.Height; y++)
                 {
                     if (img1.GetPixelColor(x, y) == img2.GetPixelColor(x, y))
                     {
-                        img1.SetPixelColor(x, y, 0);
+                        newImg.SetPixelColor(x, y, Image.Black);
                     }
                     else
                     {
-                        img1.SetPixelColor(x, y, 255);
+                        newImg.SetPixelColor(x, y, Image.White);
                     }
                 }
             }
-            return img1;
+            return newImg;
 
         }
     }

@@ -6,6 +6,7 @@ namespace ImageProcessing.Operations
     {
         public Edges()
         {
+
         }
 
         public override void Apply(Image image)
@@ -68,9 +69,6 @@ namespace ImageProcessing.Operations
             //                       -2, -1,  0);
             //ApplyKernel(Image, kernel);
 
-            //TODO merge all edge images
-
-
             //convolve extra step for thicker lines
             //kernel.SetKernelValues(1, 2, 1,
             //                       2,-12, 2, 
@@ -107,6 +105,5 @@ namespace ImageProcessing.Operations
             ApplyKernel(image, kernel);
 
         }
-
     }
 }

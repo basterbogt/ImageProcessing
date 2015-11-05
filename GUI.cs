@@ -94,26 +94,34 @@ namespace ImageProcessing
                     image.Apply(Operation.Operations.Smoothing);
                     break;
                 case 2:
-                    this.Text = "Edges + subtraction";
-                    image.Apply(Operation.Operations.Inverse);
-                    Image temp = new Image(image.GetPixels(), image.Size);
-                    image.Apply(Operation.Operations.Edges);
-                    image.Apply(Operation.Operations.NegativeThreshold);
-                        
-                   // image = Addition.Apply(image, temp);
-                   // image = new Image(image.GetPixels(), image.Size);
-
-                    //image = Minval.Apply(image, temp);
+                    this.Text = "Edges";
+                    //image.Apply(Operation.Operations.Inverse);
                     
+
+                    //image.Apply(Operation.Operations.Edges);
+                    image.Apply(Operation.Operations.NegativeThreshold);
+
+                    Image temp = new Image(image.GetPixels(), image.Size);
+
+                    image.Apply(Operation.Operations.Opening);
+
+                    image = new Image(image.GetPixels(), image.Size);
+
+                    // image = Addition.Apply(image, temp);
+                    image = Difference.Apply(image, temp);
+                   
+
+                    //Image image2 = Maxval.Apply(new Image(image.GetPixels(), image.Size), temp);
+                    image = new Image(image.GetPixels(), image.Size);
                     break;
                 case 3:
-                    this.Text = "Opening";
+                    this.Text = "neg tresh";
                     image.Apply(Operation.Operations.NegativeThreshold);
                     
-                    //image.Apply(Operation.Operations.Closing);
+                    image.Apply(Operation.Operations.Dilation);
                     break;
                 case 4:
-                    this.Text = "Closing";
+                    this.Text = "opening";
                     image.Apply(Operation.Operations.Opening);
                     break;
                 case 5:
