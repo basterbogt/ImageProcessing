@@ -15,8 +15,8 @@
                 for (int y = 0; y < Image.Size.Height; y++)
                 {
                     int additive_value = (Image.GetPixelColor(x, y)+ Image2.GetPixelColor(x, y));
-                    if (additive_value > Image.White) additive_value = Image.White;
-                    //additive_value = (int)((additive_value) / 2.0f);//This line will re-balance the values from [ 0 , 510 ], to [ 0 , 255 ]
+                    //if (additive_value > Image.White) additive_value = Image.White;
+                    additive_value = (int)((additive_value) / 2.0f);//This line will re-balance the values from [ 0 , 510 ], to [ 0 , 255 ]
                     newImg.SetPixelColor(x, y, additive_value);
                 }
             }
