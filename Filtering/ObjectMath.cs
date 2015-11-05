@@ -26,9 +26,9 @@ namespace ImageProcessing.Filtering
         public void CalculateArea()
         {
             int counter = 0;
-            for(int x = 0; x < this.image.Size.Height; x++)
+            for(int x = 0; x < this.image.Size.Width; x++)
             {
-                for (int y = 0; y < this.image.Size.Width; y++)
+                for (int y = 0; y < this.image.Size.Height; y++)
                 {
                     if (this.image.GetPixelColor(x, y) == Image.Black) counter++;
                 }
@@ -41,9 +41,9 @@ namespace ImageProcessing.Filtering
             int startingPixelX;
             int startingpixelY;
             bool done = false;
-            for (int x = 0; x < this.image.Size.Height; x++)
+            for (int x = 0; x < this.image.Size.Width; x++)
             {
-                for (int y = 0; y < this.image.Size.Width; y++)
+                for (int y = 0; y < this.image.Size.Height; y++)
                 {
                     if (image.GetPixelColor(x, y) == Image.Black)
                     {
@@ -57,10 +57,7 @@ namespace ImageProcessing.Filtering
 
                 //todo: route bepalen
             }
-
-
-
-
+            
         }
 
         public void CalculateCompactness()
@@ -75,42 +72,42 @@ namespace ImageProcessing.Filtering
         }
         public void CalculateLongestChordOrientation()
         {
-            throw new NotImplementedException();
+
         }
         public void CalculateLongestPerpendicularChord()
         {
-            throw new NotImplementedException();
+
         }
 
 
         public void CalculateEccentricity()
         {
-            throw new NotImplementedException();
+
         }
         public void CalculateMinimalBoundingBoxArea()
         {
-            throw new NotImplementedException();
+
         }
         public void CalculateRectangularity()
         {
-            throw new NotImplementedException();
+
         }
 
         public void CalculateElongation()
         {
-            throw new NotImplementedException();
+
         }
         public void CalculateElongation2()
         {
-            throw new NotImplementedException();
+
         }
         public void CalculateCurvature()
         {
-            throw new NotImplementedException();
+
         }
         public void CalculateBendingEnergy()
         {
-            throw new NotImplementedException();
+
 
         }
 
