@@ -64,6 +64,7 @@
     <Compile Include="Kernels\Kernel2D.cs" />
     <Compile Include="Kernels\Kernel.cs" />
     <Compile Include="Operations\Gaussian.cs" />
+    <Compile Include="Operations\HistogramEqualization.cs" />
     <Compile Include="Operations\Inverse.cs" />
     <Compile Include="Operations\Minval.cs" />
     <Compile Include="Operations\Maxval.cs" />

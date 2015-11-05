@@ -86,6 +86,9 @@ namespace ImageProcessing
                 case Operation.Operations.Gaussian:
                     new Gaussian().Apply(this);
                     break;
+                case Operation.Operations.HistogramEqualization:
+                    new HistogramEqualization().Apply(this);
+                    break;
                 default:
                     throw new System.Exception("This operation doesn't exist!");
             }

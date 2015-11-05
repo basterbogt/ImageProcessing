@@ -45,7 +45,7 @@ namespace ImageProcessing.Operations
             float totalPixels = image.Size.Width * image.Size.Height;
             float idealPixelsPerBin = totalPixels / ((float)Image.TotalGrayValues);
 
-            //We calculate the list of remapped positions
+            //g(v) = the new mapping for the image's pixels. So this array holds the new positions.
             int[] g = new int[Image.TotalGrayValues];
             for (int i = 0; i < Image.TotalGrayValues; i++)
             {
@@ -53,7 +53,7 @@ namespace ImageProcessing.Operations
                 g[i] = Math.Max(0, result); //Make all negative numbers zero
             }
 
-
+            //Remap image:
             int[,] resultAfterRemap = new int[image.Size.Width, image.Size.Height];
             for (int x = 0; x < image.Size.Width; x++)
             {
