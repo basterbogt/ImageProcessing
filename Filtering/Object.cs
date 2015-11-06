@@ -1,17 +1,31 @@
-﻿using System;
+﻿using ImageProcessing.Filtering.ShapeMeasures;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace ImageProcessing.Filtering
 {
-    public partial class Object
+    public class Object
     {
         public int xOnOriginalImage { get; private set; }
         public int yOnOriginalImage { get; private set; }
 
         public Image image;
 
+
+        public int Area { get; private set; }
+        public double Perimeter { get; private set; }
+        public double Compactness { get; private set; }
+        public double Roundness { get; private set; }
+        public Chord LongestChord { get; private set; }
+        public Chord LongestPerpendicularChord { get; private set; }
+        public double Eccentricity { get; private set; }
+        public double MinimalBoundingBoxArea { get; private set; }
+        public double Rectangularity { get; private set; }
+        public double Elongation { get; private set; }
+        public double Curvature { get; private set; }
+        public double BendingEnergy { get; private set; }
 
         public Object(Image image)
         {
@@ -21,20 +35,20 @@ namespace ImageProcessing.Filtering
 
         private void CalculateValues()
         {
+            Area = ShapeMeasures.Area.Calculate(image);
+            //Perimeter = ShapeMeasures.Perimeter.Calculate(image);
+            Compactness = ShapeMeasures.Compactness.Calculate(Area, Perimeter);
+            Roundness = ShapeMeasures.Roundness.Calculate(Compactness);
 
-            CalculateArea();
-            CalculatePerimeter();
-            CalculateCompactness();
-            CalculateLongestChordLength();
-            CalculateLongestChordOrientation();
-            CalculateLongestPerpendicularChord();
-            CalculateEccentricity();
-            CalculateMinimalBoundingBoxArea();
-            CalculateRectangularity();
-            CalculateElongation();
-            CalculateElongation2();
-            CalculateCurvature();
-            CalculateBendingEnergy();
+            //LongestChord = ShapeMeasures.LongestChord.Calculate(image);
+            //LongestPerpendicularChord = ShapeMeasures.LongestPerpendicularChord.Calculate(image, LongestChord);
+            //Eccentricity = ShapeMeasures.Eccentricity.Calculate(LongestChord, LongestPerpendicularChord);
+
+            //ShapeMeasures.MinimalBoundingBoxArea.Calculate(image);
+            //ShapeMeasures.Rectangularity.Calculate(image);
+            //ShapeMeasures.Elongation.Calculate(image);
+            //ShapeMeasures.Curvature.Calculate(image);
+            //ShapeMeasures.BendingEnergy.Calculate(image);
         }
 
 

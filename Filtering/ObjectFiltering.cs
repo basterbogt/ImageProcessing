@@ -25,9 +25,8 @@ namespace ImageProcessing.Filtering
                     Todo:   Currently if one of those values is false, it stops adding the obect to the coffeemug list. If this is fine, keep it. 
                             If only a certain percentage pertentage has to be true for an object to be a cup, add (weighted) counters. 
                 */
-                if (!new Roundness().Calculate(potentialObject)) continue;
-                if (!new Area().Calculate(potentialObject)) continue;
-                
+                if (potentialObject.Area < 0) continue;
+
                 coffeeMugObjectList.Add(potentialObject);
             }
             
