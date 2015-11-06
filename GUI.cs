@@ -142,7 +142,7 @@ namespace ImageProcessing
 
                 case 5:
                     this.Text = "Colouring";
-                    ObjectDetection od = new ObjectDetection(image);
+                    ObjectDetection od = new ObjectDetection(image, true);
                     od.Apply();
                     ObjectFiltering of = new ObjectFiltering(od.objects);
                     of.Apply();
@@ -233,5 +233,16 @@ namespace ImageProcessing
             pictureBox2.Image = (System.Drawing.Image)OutputImage;                         // Display output image
         }
 
+        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            Show();
+            WindowState = FormWindowState.Normal;
+        }
+
+        private void GUI_Resize(object sender, EventArgs e)
+        {
+            if (FormWindowState.Minimized == WindowState)
+                Hide();
+        }
     }
 }
