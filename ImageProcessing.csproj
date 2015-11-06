@@ -51,6 +51,7 @@
     <Compile Include="Filtering\Filter.cs" />
     <Compile Include="Filtering\Object.cs" />
     <Compile Include="Filtering\ObjectDetection.cs" />
+    <Compile Include="Filtering\ObjectMath.cs" />
     <Compile Include="Filtering\Roundness.cs" />
     <Compile Include="GUI.cs">
       <SubType>Form</SubType>
@@ -63,6 +64,7 @@
     <Compile Include="Kernels\Kernel2D.cs" />
     <Compile Include="Kernels\Kernel.cs" />
     <Compile Include="Operations\Gaussian.cs" />
+    <Compile Include="Operations\HistogramEqualization.cs" />
     <Compile Include="Operations\Inverse.cs" />
     <Compile Include="Operations\Minval.cs" />
     <Compile Include="Operations\Maxval.cs" />

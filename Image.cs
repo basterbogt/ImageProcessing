@@ -1,4 +1,5 @@
 ﻿using ImageProcessing.Operations;
+using System;
 using System.Drawing;
 
 namespace ImageProcessing
@@ -86,10 +87,50 @@ namespace ImageProcessing
                 case Operation.Operations.Gaussian:
                     new Gaussian().Apply(this);
                     break;
+                case Operation.Operations.HistogramEqualization:
+                    new HistogramEqualization().Apply(this);
+                    break;
                 default:
                     throw new System.Exception("This operation doesn't exist!");
             }
 
+        }
+
+        public bool Normalise()
+        {
+
+            int min = int.MaxValue;
+            int max = int.MinValue;
+
+            //Find max and min values from the image:          
+            for (int x = 0; x < Size.Width; x++)
+            {
+                for (int y = 0; y < Size.Height; y++)
+                {
+                    int pixelValue = pixelArray[x, y];
+                    min = Math.Min(min, pixelValue);
+                    max = Math.Max(max, pixelValue);
+                }
+            }
+            int newMin = Math.Abs(min);
+            int newMax = newMin + max;
+
+            //If there is a situation where the min + max is greater then an int can store:
+            if (newMax >= int.MaxValue) return false;
+
+            float divide = ((float)newMax) / ((float)(Image.TotalGrayValues - 1));
+
+            //normalise each pixelValue:        
+            for (int x = 0; x < Size.Width; x++)
+            {
+                for (int y = 0; y < Size.Height; y++)
+                {
+                    pixelArray[x, y] = (int)((pixelArray[x, y] + newMin) / divide);
+                }
+            }
+
+
+            return true;
         }
     }
 }
