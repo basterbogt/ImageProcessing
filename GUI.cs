@@ -123,8 +123,10 @@ namespace ImageProcessing
                     this.Text = "Dilation";
 
                     //deze inverse moet een toggle hebben voor licht of donker van het plaatje
-                    image.Apply(Operation.Operations.Inverse);
-
+                    if (AverageImageValue(image) > 128)
+                    {
+                        image.Apply(Operation.Operations.Inverse);
+                    }
                     image.Apply(Operation.Operations.Dilation);
                     image.Apply(Operation.Operations.Dilation);
                     image.Apply(Operation.Operations.Dilation);
@@ -202,6 +204,20 @@ namespace ImageProcessing
         private void DisplayInputImage()
         {
             pictureBox1.Image = (System.Drawing.Image)InputImage;                 // Display input image
+        }
+
+        private int AverageImageValue(Image image)
+        { int val = 0;
+
+            for (int x = 0; x < image.Size.Width; x++)
+            {
+                for (int y = 0; y < image.Size.Height; y++)
+                {
+                    val+= (image.GetPixelColor(x, y));
+                }
+            }
+            val = val / (image.Size.Width * image.Size.Height);
+            return val;
         }
 
         private void DisplayOutputImage(Image Image)
