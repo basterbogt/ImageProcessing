@@ -75,37 +75,37 @@ namespace ImageProcessing
 
             //==========================================================================================
             // TODO: include here your own code
-            // Todo: Remove this code from the fucking GUI and put logic elsewhere...
-
 
             ProcessImage();
-
-
-
+            
             //==========================================================================================
 
-            if(!ProcessingDone)
+            //Display Image
+            DisplayOutputImage(image);
+
+            if (!ProcessingDone)
                 applyButton.Enabled = true;
 
         }
 
         private void ProcessImage()
         {
+            string text;
             switch (currentStep)
             {
                 case 0:
-                    this.Text = "GrayValue";
-                    this.image = new Image(InputImage);
+                    text = "Image to Gray";
+                    image = new Image(InputImage);
                     break;
 
                 case 1:
-                    this.Text = "Smoothing";
+                    text = "Smoothing";
                     image.Apply(Operation.Operations.Gaussian);
                     image.Apply(Operation.Operations.Gaussian);
                     break;
 
                 case 2:
-                    this.Text = "Edges";
+                    text = "Edges";
                     
 
                     //image.Apply(Operation.Operations.Edges);
@@ -128,7 +128,7 @@ namespace ImageProcessing
                     break;
 
                 case 3:
-                    this.Text = "Dilation";
+                    text = "Dilation";
                     /*
                     //deze inverse moet een toggle hebben voor licht of donker van het plaatje
                     if (AverageImageValue(image) > 128)
@@ -145,12 +145,12 @@ namespace ImageProcessing
                     break;
 
                 case 4:
-                    this.Text = "opening";
+                    text = "Opening";
                     image.Apply(Operation.Operations.Opening);
                     break;
 
                 case 5:
-                    this.Text = "Colouring";
+                    text = "Object Filtering";
                     ObjectDetection od = new ObjectDetection(image, true);
                     od.Apply();
                     ObjectFiltering of = new ObjectFiltering(od.objects);
@@ -160,14 +160,16 @@ namespace ImageProcessing
                     break;
 
                 default:
-                    this.Text = "Done";
+                    text = "Done";
                     ProcessingDone = true;
-                    return;
+                    break;
             }
 
+            if (text != null && text != "") this.Text = text;
+
             currentStep++;
-            //Display Image
-            DisplayOutputImage(image);
+
+            return;
         }
 
 
