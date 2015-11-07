@@ -176,7 +176,7 @@ namespace ImageProcessing
         {
             if (OutputImage == null) return;                                // Get out if no output image
             if (saveImageDialog.ShowDialog() == DialogResult.OK)
-                OutputImage.Save(saveImageDialog.FileName);                 // Save the output image
+                image.SaveFullPath(saveImageDialog.FileName);
         }
 
         private void ResetProgressBar()
