@@ -25,8 +25,10 @@ namespace ImageProcessing.Filtering
                     Todo:   Currently if one of those values is false, it stops adding the obect to the coffeemug list. If this is fine, keep it. 
                             If only a certain percentage pertentage has to be true for an object to be a cup, add (weighted) counters. 
                 */
-                if (potentialObject.Area < 25) continue;
-                if (potentialObject.Openings != 1) continue;
+                if (potentialObject.Area < 25) continue; //Ignore small objects
+                if (potentialObject.Openings != 1) continue; //Make sure there is an opening. Without it, it's not a mug
+                if (potentialObject.Eccentricity > 0.8 && potentialObject.Eccentricity < 1.2) continue; //A mug is not round. This code will remove circles/ellipses from our results
+                
 
                 coffeeMugObjectList.Add(potentialObject);
             }

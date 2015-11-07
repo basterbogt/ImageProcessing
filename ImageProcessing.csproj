@@ -80,10 +80,12 @@
     <Compile Include="Filtering\ShapeMeasures\LongestChord.cs" />
     <Compile Include="Filtering\ShapeMeasures\LongestPerpendicularChord.cs" />
     <Compile Include="Filtering\ShapeMeasures\MinimalBoundingBoxArea.cs" />
+    <Compile Include="Filtering\ShapeMeasures\ObjectOuterPixels.cs" />
     <Compile Include="Filtering\ShapeMeasures\Perimeter.cs" />
     <Compile Include="Filtering\ShapeMeasures\Rectangularity.cs" />
     <Compile Include="Filtering\ShapeMeasures\Roundness.cs" />
     <Compile Include="Filtering\ShapeMeasures\SkeletonByThinning.cs" />
+    <Compile Include="Filtering\ShowResultOnOriginalImage.cs" />
     <Compile Include="GUI.cs">
       <SubType>Form</SubType>
     </Compile>

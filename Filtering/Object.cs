@@ -38,13 +38,13 @@ namespace ImageProcessing.Filtering
         private void CalculateValues()
         {
             Area = ShapeMeasures.Area.Calculate(image);
-            //Perimeter = ShapeMeasures.Perimeter.Calculate(image);
+            Perimeter = ShapeMeasures.Perimeter.Calculate(image);
             Compactness = ShapeMeasures.Compactness.Calculate(Area, Perimeter);
             Roundness = ShapeMeasures.Roundness.Calculate(Compactness);
 
-            //LongestChord = ShapeMeasures.LongestChord.Calculate(image);
-            //LongestPerpendicularChord = ShapeMeasures.LongestPerpendicularChord.Calculate(image, LongestChord);
-            //Eccentricity = ShapeMeasures.Eccentricity.Calculate(LongestChord, LongestPerpendicularChord);
+            LongestChord = ShapeMeasures.LongestChord.Calculate(image);
+            LongestPerpendicularChord = ShapeMeasures.LongestPerpendicularChord.Calculate(image, LongestChord);
+            Eccentricity = ShapeMeasures.Eccentricity.Calculate(LongestChord, LongestPerpendicularChord);
 
             //ShapeMeasures.MinimalBoundingBoxArea.Calculate(image);
             //ShapeMeasures.Rectangularity.Calculate(image);
