@@ -49,6 +49,8 @@ namespace ImageProcessing.Filtering
             //ShapeMeasures.Elongation.Calculate(image);
             //ShapeMeasures.Curvature.Calculate(image);
             //ShapeMeasures.BendingEnergy.Calculate(image);
+
+            image = SkeletonByThinning.GenerateSkeleton(image);
         }
 
 
