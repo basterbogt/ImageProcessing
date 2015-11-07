@@ -213,7 +213,16 @@ namespace ImageProcessing
 
         private void DisplayInputImage()
         {
-            pictureBox1.Image = (System.Drawing.Image)InputImage;                 // Display input image
+            Bitmap m = new Bitmap(InputImage.Size.Width, InputImage.Size.Height);
+            // Copy array to output Bitmap
+            for (int x = 0; x < m.Size.Width; x++)
+            {
+                for (int y = 0; y < m.Size.Height; y++)
+                {
+                    m.SetPixel(x, y, InputImage.GetPixel(x, y));               
+                }
+            }
+            pictureBox1.Image = m;                 // Display input image
         }
 
         private int AverageImageValue(Image image)
