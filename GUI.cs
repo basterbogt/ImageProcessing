@@ -223,15 +223,16 @@ namespace ImageProcessing
 
         private void DisplayOutputImage(Image Image)
         {
+            Bitmap m = new Bitmap(Image.Size.Width, Image.Size.Height);
             // Copy array to output Bitmap
-            for (int x = 0; x < OutputImage.Size.Width; x++)
+            for (int x = 0; x < m.Size.Width; x++)
             {
-                for (int y = 0; y < OutputImage.Size.Height; y++)
+                for (int y = 0; y < m.Size.Height; y++)
                 {
-                    OutputImage.SetPixel(x, y, GreyScale.CreateColorFromGrayValue(Image.GetPixelColor(x, y)));               // Set the pixel color at coordinate (x,y)
+                    m.SetPixel(x, y, GreyScale.CreateColorFromGrayValue(Image.GetPixelColor(x, y)));               // Set the pixel color at coordinate (x,y)
                 }
             }
-            pictureBox2.Image = (System.Drawing.Image)OutputImage;                         // Display output image
+            pictureBox2.Image = (System.Drawing.Image)m;                         // Display output image
         }
 
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)

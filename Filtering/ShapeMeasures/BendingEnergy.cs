@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ImageProcessing.Filtering.ShapeMeasures
 {
-    class BendingEnergy
+    public class BendingEnergy
     {
     }
 }

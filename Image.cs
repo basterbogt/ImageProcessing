@@ -19,7 +19,7 @@ namespace ImageProcessing
         public Image(Bitmap InputImage)
         {
             pixelArray = new int[InputImage.Size.Width, InputImage.Size.Height]; // Create array to speed-up operations (Bitmap functions are very slow)
-            Size = InputImage.Size;
+            Size = new Size(InputImage.Size.Width, InputImage.Size.Height);
 
             // Copy input Bitmap to array            
             for (int x = 0; x < InputImage.Size.Width; x++)
