@@ -121,7 +121,7 @@ namespace ImageProcessing
 
                 case 3:
                     this.Text = "Dilation";
-
+                    /*
                     //deze inverse moet een toggle hebben voor licht of donker van het plaatje
                     if (AverageImageValue(image) > 128)
                     {
@@ -133,6 +133,7 @@ namespace ImageProcessing
                     image.Apply(Operation.Operations.Dilation);
 
                     image.Apply(Operation.Operations.Inverse);
+                    */                
                     break;
 
                 case 4:
@@ -142,7 +143,7 @@ namespace ImageProcessing
 
                 case 5:
                     this.Text = "Colouring";
-                    ObjectDetection od = new ObjectDetection(image);
+                    ObjectDetection od = new ObjectDetection(image, true);
                     od.Apply();
                     ObjectFiltering of = new ObjectFiltering(od.objects);
                     of.Apply();
@@ -233,5 +234,16 @@ namespace ImageProcessing
             pictureBox2.Image = (System.Drawing.Image)OutputImage;                         // Display output image
         }
 
+        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            Show();
+            WindowState = FormWindowState.Normal;
+        }
+
+        private void GUI_Resize(object sender, EventArgs e)
+        {
+            if (FormWindowState.Minimized == WindowState)
+                Hide();
+        }
     }
 }

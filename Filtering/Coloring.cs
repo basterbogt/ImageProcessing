@@ -24,7 +24,7 @@ namespace ImageProcessing.Filtering
             {
                 for (int y = 0; y < size.Height; y++)
                 {
-                    image[x, y] = Image.White;
+                    image[x, y] = Image.Black;
                 }
             }
 

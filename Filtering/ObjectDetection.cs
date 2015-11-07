@@ -10,9 +10,12 @@ namespace ImageProcessing.Filtering
         private Image originalImage;
         public List<Object> objects { get; private set; }
 
-        public ObjectDetection(Image image)
+        private bool IgnoreObjectsNearBorder;
+
+        public ObjectDetection(Image image, bool ignoreObjectsNearBorder = true)
         {
             this.originalImage = image;
+            this.IgnoreObjectsNearBorder = ignoreObjectsNearBorder;
             objects = new List<Object>();
         }
 
@@ -80,13 +83,46 @@ namespace ImageProcessing.Filtering
                     list.Push(new Coordinate(x, y + 1));
 
             }
-            objects.Add(new Object(new Image(newPixels, originalImage.Size)));//Add object to object array
+
+            //Ignore Objects that touch the border
+            if(!(IgnoreObjectsNearBorder && ObjectNearBorder(newPixels)))
+            {
+                objects.Add(new Object(new Image(newPixels, originalImage.Size)));//Add object to object array
+            }
+
         }
         private bool LegitPixel(int x, int y)
         {
             if (x < 0 || x >= originalImage.Size.Width || y < 0 || y >= originalImage.Size.Height) return false;    //Out of bounce
             if (originalImage.GetPixelColor(x, y) == Image.White) return false;        //If original is white then dont fill it in and quit looking at neighbours
             return true;
+        }
+
+        private bool ObjectNearBorder(int[,] pixels)
+        {
+            bool result = false;
+            
+            //Check first x row
+            for(int x = 0; x < originalImage.Size.Width; x++)
+            {
+                if (pixels[x, 0] == Image.Black) result = true;
+            }
+            //Check last x row
+            for (int x = 0; x < originalImage.Size.Width; x++)
+            {
+                if (pixels[x, originalImage.Size.Height -1] == Image.Black) result = true;
+            }
+            //check first y row
+            for (int y = 0; y < originalImage.Size.Height; y++)
+            {
+                if (pixels[0, y] == Image.Black) result = true;
+            }
+            //check last y row
+            for (int y = 0; y < originalImage.Size.Height; y++)
+            {
+                if (pixels[originalImage.Size.Width - 1, y] == Image.Black) result = true;
+            }
+            return result;
         }
 
         public struct Coordinate

@@ -1,6 +1,7 @@
 ﻿using ImageProcessing.Operations;
 using System;
 using System.Drawing;
+using System.IO;
 
 namespace ImageProcessing
 {
@@ -132,5 +133,30 @@ namespace ImageProcessing
 
             return true;
         }
+
+        public void Save(string name, string defaultFolder = null)
+        {
+
+            Bitmap b = new Bitmap(Size.Width, Size.Height);
+            for (int x = 0; x < Size.Width; x++)
+            {
+                for (int y = 0; y < Size.Height; y++)
+                {
+                    if (GetPixelColor(x, y) == Image.White)
+                    {
+                        b.SetPixel(x, y, Color.White);
+                    }
+                    else
+                    {
+
+                        b.SetPixel(x, y, Color.Black);
+                    }
+                }
+            }
+            if (defaultFolder == null) defaultFolder = Program.ImageDirectory;
+            Directory.CreateDirectory(defaultFolder);
+            b.Save(defaultFolder + "\\" + name + " - " + DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond + ".png", System.Drawing.Imaging.ImageFormat.Png);
+        }
+        
     }
 }

@@ -28,7 +28,7 @@ namespace ImageProcessing.Structures
                 array[row] = new bool[ColumnSize];
                 for (int column = 0; column < StructureSize.Width; column++)
                 {
-                    array[row][column] = Convert.ToBoolean(values[((row + 1) * (column + 1)) - 1]); //adding 1 to get actual number, removing 1 to get the index number of that number
+                    array[row][column] = Convert.ToBoolean(values[((row * StructureSize.Width) + column)]);
                 }
             }
         }
