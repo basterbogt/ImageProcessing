@@ -14,7 +14,9 @@ namespace ImageProcessing
         private bool ProcessingDone = false;
         private int currentStep = 0;
 
+        private System.Drawing.Bitmap original;
         private Image image;
+        private ObjectFiltering of;
 
         public GUI()
         {
@@ -36,6 +38,7 @@ namespace ImageProcessing
                 else
                 {
                     image = null;
+                    original = (Bitmap)InputImage.Clone();
                     if (OutputImage != null)
                     {
                         OutputImage.Dispose();
@@ -80,11 +83,13 @@ namespace ImageProcessing
             
             //==========================================================================================
 
-            //Display Image
-            DisplayOutputImage(image);
 
             if (!ProcessingDone)
+            {
+                //Display Image
+                DisplayOutputImage(image);
                 applyButton.Enabled = true;
+            }
 
         }
 
@@ -153,15 +158,15 @@ namespace ImageProcessing
                     text = "Object Filtering";
                     ObjectDetection od = new ObjectDetection(image, true);
                     od.Apply();
-                    ObjectFiltering of = new ObjectFiltering(od.objects);
+                    of = new ObjectFiltering(od.objects);
                     of.Apply();
                     image = new Coloring(of.coffeeMugObjectList).ConstructNewImage(image.Size);
-                    image = new Image(image.GetPixels(), image.Size);
                     break;
-
+                    
                 default:
                     text = "Done";
                     ProcessingDone = true;
+                    DisplayInputImage(new ShowResultOnOriginalImage(original, of.coffeeMugObjectList).ConstructNewImage());
                     break;
             }
 
@@ -171,7 +176,6 @@ namespace ImageProcessing
 
             return;
         }
-
 
 
         private void saveButton_Click(object sender, EventArgs e)
@@ -225,6 +229,20 @@ namespace ImageProcessing
                 }
             }
             pictureBox1.Image = m;                 // Display input image
+        }
+
+        private void DisplayInputImage(System.Drawing.Bitmap image)
+        {
+            Bitmap m = new Bitmap(InputImage.Size.Width, InputImage.Size.Height);
+            // Copy array to output Bitmap
+            for (int x = 0; x < m.Size.Width; x++)
+            {
+                for (int y = 0; y < m.Size.Height; y++)
+                {
+                    m.SetPixel(x, y, image.GetPixel(x, y));
+                }
+            }
+            pictureBox2.Image = m;                 // Display input image
         }
 
         private int AverageImageValue(Image image)

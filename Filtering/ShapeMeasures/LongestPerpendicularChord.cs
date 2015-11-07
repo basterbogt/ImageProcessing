@@ -10,22 +10,13 @@ namespace ImageProcessing.Filtering.ShapeMeasures
     {
         public static Chord Calculate(Image image, Chord longestChord)
         {
+
+            List<Point> coordinates = ObjectOuterPixels.OuterPoints(image);
+
             double length = 0;
             double rotation = 0;
             Point StartingPoint = new Point();
             Point EndingPoint = new Point();
-
-            List<Point> coordinates = new List<Point>();
-
-            for (int x = 0; x < image.Size.Width; x++)
-            {
-                for (int y = 0; y < image.Size.Height; y++)
-                {
-                    if (image.GetPixelColor(x, y) == Image.Black)
-                        coordinates.Add(new Point(x, y));
-                }
-            }
-
             foreach (Point p1 in coordinates)
             {
                 foreach (Point p2 in coordinates)
@@ -49,8 +40,9 @@ namespace ImageProcessing.Filtering.ShapeMeasures
                 }
             }
 
-
-            return new Chord(length, rotation, StartingPoint, EndingPoint);
+            Chord lpc = new Chord(length, rotation, StartingPoint, EndingPoint);
+            ObjectOuterPixels.SaveOuterPixelsAsImageWithChords(longestChord, lpc, coordinates, image.Size);
+            return lpc;
 
         }
     }

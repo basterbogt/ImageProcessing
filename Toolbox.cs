@@ -27,21 +27,17 @@ namespace ImageProcessing
 
         public static Point FindFirstPixel(Image image)
         {
-            Point point = new Point();
             for (int x = 0; x < image.Size.Width; x++)
             {
                 for (int y = 0; y < image.Size.Height; y++)
                 {
-                    int pixelColor = image.GetPixelColor(x, y);
-                    if (pixelColor == Image.Black)
+                    if (image.GetPixelColor(x, y) == Image.Black)
                     {
-                        point.X = x;
-                        point.Y = y;
-                        return point;
+                        return new Point(x, y);
                     }
                 }
             }
-            return point;
+            return Point.Empty;
         }
     }
 }
