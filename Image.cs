@@ -136,26 +136,21 @@ namespace ImageProcessing
 
         public void Save(string name, string defaultFolder = null)
         {
-
+            if (defaultFolder == null) defaultFolder = Program.ImageDirectory;
+            Directory.CreateDirectory(defaultFolder);
+            SaveFullPath(defaultFolder + "\\" + name + " - " + DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond + ".png");
+        }
+        public void SaveFullPath(string name)
+        {
             Bitmap b = new Bitmap(Size.Width, Size.Height);
             for (int x = 0; x < Size.Width; x++)
             {
                 for (int y = 0; y < Size.Height; y++)
                 {
-                    if (GetPixelColor(x, y) == Image.White)
-                    {
-                        b.SetPixel(x, y, Color.White);
-                    }
-                    else
-                    {
-
-                        b.SetPixel(x, y, Color.Black);
-                    }
+                    b.SetPixel(x, y, GreyScale.CreateColorFromGrayValue(GetPixelColor(x, y)));
                 }
             }
-            if (defaultFolder == null) defaultFolder = Program.ImageDirectory;
-            Directory.CreateDirectory(defaultFolder);
-            b.Save(defaultFolder + "\\" + name + " - " + DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond + ".png", System.Drawing.Imaging.ImageFormat.Png);
+            b.Save(name, System.Drawing.Imaging.ImageFormat.Png);
         }
         
     }
