@@ -10,6 +10,8 @@ namespace ImageProcessing
     {
         private Bitmap InputImage;
         private Bitmap OutputImage;
+
+        private bool ProcessingDone = false;
         private int currentStep = 0;
 
         private Image image;
@@ -17,6 +19,7 @@ namespace ImageProcessing
         public GUI()
         {
             InitializeComponent();
+            applyButton.Enabled = false;
         }
 
         private void LoadImageButton_Click(object sender, EventArgs e)
@@ -42,6 +45,8 @@ namespace ImageProcessing
                     currentStep = 0;
                     pictureBox2.Image = null;
                     this.Text = "Press 'apply' to start!";
+                    applyButton.Enabled = true;
+                    ProcessingDone = false;
                 }
             }
         }
@@ -58,6 +63,7 @@ namespace ImageProcessing
             }
             OutputImage = new Bitmap(InputImage.Size.Width, InputImage.Size.Height); // Create new output image
 
+            applyButton.Enabled = false;
 
             /**********************/
             /* Setup progress bar */
@@ -78,6 +84,8 @@ namespace ImageProcessing
 
             //==========================================================================================
 
+            if(!ProcessingDone)
+                applyButton.Enabled = true;
 
         }
 
@@ -153,6 +161,7 @@ namespace ImageProcessing
 
                 default:
                     this.Text = "Done";
+                    ProcessingDone = true;
                     return;
             }
 
@@ -208,7 +217,8 @@ namespace ImageProcessing
         }
 
         private int AverageImageValue(Image image)
-        { int val = 0;
+        {
+            int val = 0;
 
             for (int x = 0; x < image.Size.Width; x++)
             {
@@ -223,15 +233,16 @@ namespace ImageProcessing
 
         private void DisplayOutputImage(Image Image)
         {
+            Bitmap m = new Bitmap(Image.Size.Width, Image.Size.Height);
             // Copy array to output Bitmap
-            for (int x = 0; x < OutputImage.Size.Width; x++)
+            for (int x = 0; x < m.Size.Width; x++)
             {
-                for (int y = 0; y < OutputImage.Size.Height; y++)
+                for (int y = 0; y < m.Size.Height; y++)
                 {
-                    OutputImage.SetPixel(x, y, GreyScale.CreateColorFromGrayValue(Image.GetPixelColor(x, y)));               // Set the pixel color at coordinate (x,y)
+                    m.SetPixel(x, y, GreyScale.CreateColorFromGrayValue(Image.GetPixelColor(x, y)));               // Set the pixel color at coordinate (x,y)
                 }
             }
-            pictureBox2.Image = (System.Drawing.Image)OutputImage;                         // Display output image
+            pictureBox2.Image = (System.Drawing.Image)m;                         // Display output image
         }
 
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
