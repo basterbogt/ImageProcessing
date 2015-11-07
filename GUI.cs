@@ -121,7 +121,7 @@ namespace ImageProcessing
 
                 case 3:
                     this.Text = "Dilation";
-
+                    /*
                     //deze inverse moet een toggle hebben voor licht of donker van het plaatje
                     if (AverageImageValue(image) > 128)
                     {
@@ -133,6 +133,7 @@ namespace ImageProcessing
                     image.Apply(Operation.Operations.Dilation);
 
                     image.Apply(Operation.Operations.Inverse);
+                    */                
                     break;
 
                 case 4:
