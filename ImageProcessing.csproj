@@ -82,6 +82,7 @@
     <Compile Include="Filtering\ShapeMeasures\Perimeter.cs" />
     <Compile Include="Filtering\ShapeMeasures\Rectangularity.cs" />
     <Compile Include="Filtering\ShapeMeasures\Roundness.cs" />
+    <Compile Include="Filtering\ShapeMeasures\SkeletonByThinning.cs" />
     <Compile Include="GUI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,6 +116,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Filtering\ObjectFiltering.cs" />
+    <Compile Include="Structures\DoubleStructure2D.cs" />
     <Compile Include="Structures\Structure.cs" />
     <Compile Include="Structures\Structure1D.cs" />
     <Compile Include="Structures\Structure2D.cs" />
