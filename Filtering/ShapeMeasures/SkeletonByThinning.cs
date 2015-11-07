@@ -1,4 +1,5 @@
-﻿using ImageProcessing.Structures;
+﻿using ImageProcessing.Operations;
+using ImageProcessing.Structures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace ImageProcessing.Filtering.ShapeMeasures
                                                     1, 1, 1), 
                                     new Structure2D(1, 1, 1,
                                                     0, 0, 0, 
-                                                    0, 0, 0), skeleton.Size);
+                                                    0, 0, 0));
 
             DoubleStructure2D L2 = new DoubleStructure2D(
                                     new Structure2D(0, 0, 0,
@@ -29,7 +30,7 @@ namespace ImageProcessing.Filtering.ShapeMeasures
                                                     1, 1, 0),
                                     new Structure2D(0, 1, 0,
                                                     0, 0, 1,
-                                                    0, 0, 0), skeleton.Size);
+                                                    0, 0, 0));
 
             DoubleStructure2D L3 = new DoubleStructure2D(
                                     new Structure2D(1, 0, 0,
@@ -37,7 +38,7 @@ namespace ImageProcessing.Filtering.ShapeMeasures
                                                     1, 0, 0),
                                     new Structure2D(0, 0, 1,
                                                     0, 0, 1,
-                                                    0, 0, 1), skeleton.Size);
+                                                    0, 0, 1));
 
             DoubleStructure2D L4 = new DoubleStructure2D(
                                     new Structure2D(1, 1, 0,
@@ -45,7 +46,7 @@ namespace ImageProcessing.Filtering.ShapeMeasures
                                                     0, 0, 0),
                                     new Structure2D(0, 0, 0,
                                                     0, 0, 1,
-                                                    0, 1, 0), skeleton.Size);
+                                                    0, 1, 0));
 
             DoubleStructure2D L5 = new DoubleStructure2D(
                                     new Structure2D(1, 1, 1,
@@ -53,7 +54,7 @@ namespace ImageProcessing.Filtering.ShapeMeasures
                                                     0, 0, 0),
                                     new Structure2D(0, 0, 0,
                                                     0, 0, 0,
-                                                    1, 1, 1), skeleton.Size);
+                                                    1, 1, 1));
 
             DoubleStructure2D L6 = new DoubleStructure2D(
                                     new Structure2D(0, 1, 1,
@@ -61,7 +62,7 @@ namespace ImageProcessing.Filtering.ShapeMeasures
                                                     0, 0, 0),
                                     new Structure2D(0, 0, 0,
                                                     1, 0, 0,
-                                                    0, 1, 0), skeleton.Size);
+                                                    0, 1, 0));
 
             DoubleStructure2D L7 = new DoubleStructure2D(
                                     new Structure2D(0, 0, 1,
@@ -69,7 +70,7 @@ namespace ImageProcessing.Filtering.ShapeMeasures
                                                     0, 0, 1),
                                     new Structure2D(1, 0, 0,
                                                     1, 0, 0,
-                                                    1, 0, 0), skeleton.Size);
+                                                    1, 0, 0));
 
             DoubleStructure2D L8 = new DoubleStructure2D(
                                     new Structure2D(0, 0, 0,
@@ -77,20 +78,20 @@ namespace ImageProcessing.Filtering.ShapeMeasures
                                                     0, 1, 1),
                                     new Structure2D(0, 1, 0,
                                                     1, 0, 0,
-                                                    0, 0, 0), skeleton.Size);
+                                                    0, 0, 0));
 
             int[,] currentImage;
             while (true)
             {
                 currentImage = (int[,])skeleton.GetPixels().Clone();
-                ApplyDoubleStructure(image, L1);
-                ApplyDoubleStructure(image, L2);
-                ApplyDoubleStructure(image, L3);
-                ApplyDoubleStructure(image, L4);
-                ApplyDoubleStructure(image, L5);
-                ApplyDoubleStructure(image, L6);
-                ApplyDoubleStructure(image, L7);
-                ApplyDoubleStructure(image, L8);
+                ApplyDoubleStructure(skeleton, L1);
+                ApplyDoubleStructure(skeleton, L2);
+                ApplyDoubleStructure(skeleton, L3);
+                ApplyDoubleStructure(skeleton, L4);
+                ApplyDoubleStructure(skeleton, L5);
+                ApplyDoubleStructure(skeleton, L6);
+                ApplyDoubleStructure(skeleton, L7);
+                ApplyDoubleStructure(skeleton, L8);
                 if (Toolbox.EqualPixels(currentImage, skeleton.GetPixels(), skeleton.Size)) break;
             }
 
@@ -107,17 +108,7 @@ namespace ImageProcessing.Filtering.ShapeMeasures
 
             int[,] currentPixels = image.GetPixels();
             int[,] newPixels = new int[image.Size.Width, image.Size.Height];
-
-            //initialise image
-            for (int x = 0; x < image.Size.Width; x++)
-            {
-                for (int y = 0; y < image.Size.Height; y++)
-                {
-
-                    newPixels[x, y] = Image.White;//Default White value
-                }
-            }
-
+            
             //structure information
             int structureWidth = structure.StructureSize.Width;
             int structureHeight = structure.StructureSize.Height;
@@ -157,17 +148,25 @@ namespace ImageProcessing.Filtering.ShapeMeasures
 
                             if (ForeGroundValue && pixelColor == Image.Black) continue;
                             if (BackGroundValue && pixelColor == Image.White) continue;
+                            if (!ForeGroundValue && !BackGroundValue) continue;
 
                             pixelEnabled = false;
                             break;
 
                         }
                     }
+                    if(pixelEnabled)
+                    {
+                        pixelEnabled = true;
+                    }
                     newPixels[x, y] = (pixelEnabled) ? Image.Black : Image.White; //sets new value
 
                 }
             }
-            image.SetPixels(newPixels);
+
+            Image newImage = Subtraction.ApplyBlackWhite(image, new Image(newPixels, image.Size));
+            image.SetPixels(newImage.GetPixels());
+            
         }
     }
 }

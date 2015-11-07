@@ -27,6 +27,8 @@ namespace ImageProcessing.Filtering
         public double Curvature { get; private set; }
         public double BendingEnergy { get; private set; }
 
+        public int Openings { get; private set; }
+
         public Object(Image image)
         {
             Trim(image);
@@ -50,7 +52,9 @@ namespace ImageProcessing.Filtering
             //ShapeMeasures.Curvature.Calculate(image);
             //ShapeMeasures.BendingEnergy.Calculate(image);
 
-            image = SkeletonByThinning.GenerateSkeleton(image);
+            Openings = CountOpenings.Calculate(image);
+
+
         }
 
 
@@ -61,11 +65,11 @@ namespace ImageProcessing.Filtering
         /// <param name="image"></param>
         private void Trim(Image image)
         {
-            int amountOfEmptyRowsTop = CalculateEmptyRowsFromTop(image);
-            int amountOfEmptyRowsBot = CalculateEmptyRowsFromBottom(image);
-            int amountOfEmptyRowsLeft = CalculateEmptyRowsFromLeft(image);
-            int amountOfEmptyRowsRight = CalculateEmptyRowsFromRight(image);
-            
+            int amountOfEmptyRowsTop = Math.Max(CalculateEmptyRowsFromTop(image) - 1, 0); //Removing one, so we always keep 1 empty space around the images.
+            int amountOfEmptyRowsBot = Math.Max(CalculateEmptyRowsFromBottom(image) - 1, 0);
+            int amountOfEmptyRowsLeft = Math.Max(CalculateEmptyRowsFromLeft(image) - 1, 0);
+            int amountOfEmptyRowsRight = Math.Max(CalculateEmptyRowsFromRight(image) - 1, 0);
+
             //Create new image:
             int newImageHeight = image.Size.Height - amountOfEmptyRowsTop - amountOfEmptyRowsBot;
             int newImageWidth = image.Size.Width - amountOfEmptyRowsLeft - amountOfEmptyRowsRight;

@@ -72,6 +72,7 @@
     <Compile Include="Filtering\ShapeMeasures\BendingEnergy.cs" />
     <Compile Include="Filtering\ShapeMeasures\Chord.cs" />
     <Compile Include="Filtering\ShapeMeasures\Compactness.cs" />
+    <Compile Include="Filtering\ShapeMeasures\CountOpenings.cs" />
     <Compile Include="Filtering\ShapeMeasures\Curvature.cs" />
     <Compile Include="Filtering\ShapeMeasures\Eccentricity.cs" />
     <Compile Include="Filtering\ShapeMeasures\Elongation.cs" />
@@ -93,6 +94,9 @@
     <Compile Include="Kernels\Kernel1D.cs" />
     <Compile Include="Kernels\Kernel2D.cs" />
     <Compile Include="Kernels\Kernel.cs" />
+    <Compile Include="Operations\BooleanOpererations\AND.cs" />
+    <Compile Include="Operations\BooleanOpererations\OR.cs" />
+    <Compile Include="Operations\BooleanOpererations\XOR.cs" />
     <Compile Include="Operations\Gaussian.cs" />
     <Compile Include="Operations\HistogramEqualization.cs" />
     <Compile Include="Operations\Inverse.cs" />
