@@ -72,7 +72,7 @@
     <Compile Include="Filtering\ShapeMeasures\BendingEnergy.cs" />
     <Compile Include="Filtering\ShapeMeasures\Chord.cs" />
     <Compile Include="Filtering\ShapeMeasures\Compactness.cs" />
-    <Compile Include="Filtering\ShapeMeasures\CountOpenings.cs" />
+    <Compile Include="Filtering\ShapeMeasures\NumberOfHoles.cs" />
     <Compile Include="Filtering\ShapeMeasures\Curvature.cs" />
     <Compile Include="Filtering\ShapeMeasures\Eccentricity.cs" />
     <Compile Include="Filtering\ShapeMeasures\Elongation.cs" />
@@ -104,7 +104,6 @@
     <Compile Include="Operations\Inverse.cs" />
     <Compile Include="Operations\Minval.cs" />
     <Compile Include="Operations\Maxval.cs" />
-    <Compile Include="Operations\Average.cs" />
     <Compile Include="Operations\Subtraction.cs" />
     <Compile Include="Operations\Addition.cs" />
     <Compile Include="Operations\Closing.cs" />
