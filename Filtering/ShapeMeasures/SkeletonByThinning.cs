@@ -1,18 +1,16 @@
 ﻿using ImageProcessing.Operations;
 using ImageProcessing.Structures;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ImageProcessing.Filtering.ShapeMeasures
 {
+    /// <summary>
+    /// Skeleton by thinning: We use thinning to get a skeleton of an item
+    /// </summary>
     public class SkeletonByThinning
     {
         public static int Intensity = 1;
 
-        public static Image GenerateSkeleton(Image image)
+        public static Image Generate(Image image)
         {
             Image skeleton = new Image(image.GetPixels(), image.Size);
 
@@ -102,8 +100,12 @@ namespace ImageProcessing.Filtering.ShapeMeasures
             return skeleton;
         }
 
-
-        public static void ApplyDoubleStructure(Image image, DoubleStructure2D structure)
+        /// <summary>
+        /// Apply the double structure. (Thinning)
+        /// </summary>
+        /// <param name="image"></param>
+        /// <param name="structure"></param>
+        private static void ApplyDoubleStructure(Image image, DoubleStructure2D structure)
         {
 
             int[,] currentPixels = image.GetPixels();

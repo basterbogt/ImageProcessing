@@ -2,6 +2,9 @@
 
 namespace ImageProcessing.Operations
 {
+    /// <summary>
+    /// Discrete approximation to Gaussian function with sigma=1.0
+    /// </summary>
     class Gaussian : Operation
     {
         public Gaussian()
@@ -9,6 +12,10 @@ namespace ImageProcessing.Operations
 
         }
 
+        /// <summary>
+        /// Apply gaussian
+        /// </summary>
+        /// <param name="image"></param>
         public override void Apply(Image image)
         {
             //TODO: keep start image in value

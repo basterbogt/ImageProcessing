@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ImageProcessing.Filtering.ShapeMeasures
+﻿namespace ImageProcessing.Filtering.ShapeMeasures
 {
     /// <summary>
     /// Calculate the roundness of the given object

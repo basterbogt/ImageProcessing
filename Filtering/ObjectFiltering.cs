@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace ImageProcessing.Filtering
 {
@@ -8,17 +7,17 @@ namespace ImageProcessing.Filtering
     /// </summary>
     public class ObjectFiltering
     {
-        private List<Object> originalObjectList;
-        public List<Object> coffeeMugObjectList { get; private set; }
-        public ObjectFiltering(List<Object> objects)
+        private List<Item> originalObjectList;
+        public List<Item> coffeeMugObjectList { get; private set; }
+        public ObjectFiltering(List<Item> objects)
         {
             this.originalObjectList = objects;
-            coffeeMugObjectList = new List<Object>();
+            coffeeMugObjectList = new List<Item>();
         }
 
         public void Apply()
         {
-            foreach(Object potentialObject in originalObjectList)
+            foreach(Item potentialObject in originalObjectList)
             {
                 //Checking for valid values. If false, ignore this object and check the next one
                 /*

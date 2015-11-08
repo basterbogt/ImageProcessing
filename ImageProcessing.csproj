@@ -67,16 +67,14 @@
   <ItemGroup>
     <Compile Include="Filtering\ShapeMeasures\Area.cs" />
     <Compile Include="Filtering\Coloring.cs" />
-    <Compile Include="Filtering\Object.cs" />
+    <Compile Include="Filtering\Item.cs" />
     <Compile Include="Filtering\ObjectDetection.cs" />
-    <Compile Include="Filtering\ShapeMeasures\BendingEnergy.cs" />
     <Compile Include="Filtering\ShapeMeasures\Chord.cs" />
     <Compile Include="Filtering\ShapeMeasures\Compactness.cs" />
     <Compile Include="Filtering\ShapeMeasures\NumberOfHoles.cs" />
     <Compile Include="Filtering\ShapeMeasures\Curvature.cs" />
     <Compile Include="Filtering\ShapeMeasures\Eccentricity.cs" />
     <Compile Include="Filtering\ShapeMeasures\Elongation.cs" />
-    <Compile Include="Filtering\ShapeMeasures\GrahamScan.cs" />
     <Compile Include="Filtering\ShapeMeasures\LongestChord.cs" />
     <Compile Include="Filtering\ShapeMeasures\LongestPerpendicularChord.cs" />
     <Compile Include="Filtering\ShapeMeasures\MinimalBoundingBoxArea.cs" />

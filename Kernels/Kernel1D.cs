@@ -1,5 +1,8 @@
 ﻿namespace ImageProcessing.Kernels
 {
+    /// <summary>
+    /// Code that represents a 1d kernel, used in several operations to calculate new pixelvalues based on neighbouring pixels
+    /// </summary>
     public class Kernel1D: Kernel
     {
         public enum Alignment { Horizontal, Vertical }
@@ -15,8 +18,11 @@
         {
             CurrentAlignment = alignment;
         }
-
-
+        
+        /// <summary>
+        /// Set the values of this kernel
+        /// </summary>
+        /// <param name="values">a double array representing the kernel values</param>
         override public void SetKernelValues(params double[] values)
         {
             int kernelRowSize = (CurrentAlignment.Equals(Alignment.Horizontal))? 1: values.Length;

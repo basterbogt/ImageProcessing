@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 
 namespace ImageProcessing.Filtering.ShapeMeasures
 {
+    /// <summary>
+    /// Code to calculate the longestChord of an item
+    /// </summary>
     public class LongestChord
     {
-
-
         public static Chord Calculate(Image image)
         {
-            List<Point> coordinates = ObjectOuterPixels.OuterPoints(image);
+            List<Point> coordinates = ObjectOuterPixels.OuterPoints(image); //Get all the outer pixels of the object
 
             double length = 0;
             double rotation = 0;
@@ -26,8 +25,8 @@ namespace ImageProcessing.Filtering.ShapeMeasures
                     //if (p2.X > p1.X) continue;
                     //if (p2.Y > p1.Y) continue;
 
-                    double lengthCurrentChord = Math.Sqrt(Math.Pow(p1.X - p2.X, 2) + Math.Pow(p1.Y - p2.Y, 2));
-                    if(lengthCurrentChord > length)
+                    double lengthCurrentChord = Math.Sqrt(Math.Pow(p1.X - p2.X, 2) + Math.Pow(p1.Y - p2.Y, 2)); //Calculate the distance between two points (pythagoras)
+                    if(lengthCurrentChord > length) //if we find a new, longer, chord, update the current variables:
                     {
                         length = lengthCurrentChord;
                         rotation = (p2.Y - p1.Y) / ((double)(p2.X- p1.X));
@@ -37,7 +36,7 @@ namespace ImageProcessing.Filtering.ShapeMeasures
                 }
             }
 
-            return new Chord(length, rotation, StartingPoint, EndingPoint);
+            return new Chord(length, rotation, StartingPoint, EndingPoint);//return the longest. We all know, size matters...
             
         }
 

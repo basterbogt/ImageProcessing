@@ -1,13 +1,11 @@
-﻿using ImageProcessing.Operations;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ImageProcessing.Filtering.ShapeMeasures
 {
+    /// <summary>
+    /// Calculate the outer pixels of an object/item
+    /// </summary>
     public class ObjectOuterPixels
     {
         private static int Visited = 1;
@@ -16,6 +14,11 @@ namespace ImageProcessing.Filtering.ShapeMeasures
 
         }
 
+        /// <summary>
+        /// Returns a list of pixels that represent the border of an item
+        /// </summary>
+        /// <param name="image">target item</param>
+        /// <returns>list of points that represent the border of the item</returns>
         public static List<Point> OuterPoints(Image image)
         {
             List<Point> coordinates = new List<Point>();
@@ -121,6 +124,11 @@ namespace ImageProcessing.Filtering.ShapeMeasures
             visitedList[p.X, p.Y] = Visited;
         }
 
+        /// <summary>
+        /// Save the outerpixelpoints to an image (useful for debugging)
+        /// </summary>
+        /// <param name="points"></param>
+        /// <param name="size"></param>
         public static void SaveOuterPixelsAsImage(List<Point> points, Size size)
         {
             int[,] visited = new int[size.Width, size.Height];
@@ -134,6 +142,14 @@ namespace ImageProcessing.Filtering.ShapeMeasures
             image.Save("OuterPixel");
 
         }
+
+        /// <summary>
+        /// Save the with chords (useful for debugging)
+        /// </summary>
+        /// <param name="longestChord"></param>
+        /// <param name="lpc"></param>
+        /// <param name="coordinates"></param>
+        /// <param name="size"></param>
         public static void SaveOuterPixelsAsImageWithChords(Chord longestChord, Chord lpc, List<Point> coordinates, Size size)
         {
             
