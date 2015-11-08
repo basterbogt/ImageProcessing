@@ -15,7 +15,7 @@ namespace ImageProcessing
         private bool ProcessingDone = false;
         private int currentStep = 0;
 
-        private System.Drawing.Bitmap original;
+        private Bitmap original;
         private Image image;
         private ObjectFiltering of;
 
@@ -27,6 +27,9 @@ namespace ImageProcessing
             LoadInitialImage();
         }
 
+        /// <summary>
+        /// Load an initial image to prevent an empty screen
+        /// </summary>
         private void LoadInitialImage()
         {
             string initialImage = @"cupotastic.png";
@@ -37,6 +40,11 @@ namespace ImageProcessing
 
         }
 
+        /// <summary>
+        /// Listener when the user clicks on the 'load image button'
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LoadImageButton_Click(object sender, EventArgs e)
         {
            if (openImageDialog.ShowDialog() == DialogResult.OK)             // Open File Dialog
@@ -46,6 +54,10 @@ namespace ImageProcessing
             }
         }
 
+        /// <summary>
+        /// Code to load an image
+        /// </summary>
+        /// <param name="file"></param>
         private void LoadImage(string file)
         {
             imageFileName.Text = file;                                  // Show file name
@@ -96,10 +108,7 @@ namespace ImageProcessing
             //HideProgressBar();
 
             //==========================================================================================
-            // TODO: include here your own code
-
             ProcessImage();
-            
             //==========================================================================================
 
 
@@ -112,6 +121,9 @@ namespace ImageProcessing
 
         }
 
+        /// <summary>
+        /// Image processing in steps:
+        /// </summary>
         private void ProcessImage()
         {
             string text;
@@ -125,10 +137,9 @@ namespace ImageProcessing
                     image.Save("Step " + (currentStep + 1) + " - " + text);
                     break;
                 case 1:
-                    text = "Smoothing (Gaussian)";
+                    text = "Edges";
                     this.Text = text;
-                    image.Apply(Operation.Operations.Gaussian);
-                    image.Apply(Operation.Operations.Gaussian);
+                    image.Apply(Operation.Operations.Edges);
                     image.Save("Step " + (currentStep + 1) + " - " + text);
                     break;
                 case 2:
@@ -164,7 +175,7 @@ namespace ImageProcessing
                     this.Text = text;
                     ProcessingDone = true;
                     Bitmap result = new ShowResultOnOriginalImage(original, of.coffeeMugObjectList).ConstructNewImage();
-                    DisplayInputImage(result);
+                    DisplayOutputImage(result);
                     result.Save(Image.GetFileName("Step " + (currentStep + 1) + " - " + text), System.Drawing.Imaging.ImageFormat.Png);
                     break;
             }
@@ -176,7 +187,11 @@ namespace ImageProcessing
             return;
         }
 
-
+        /// <summary>
+        /// Save the image on the right side of the screen (output image)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void saveButton_Click(object sender, EventArgs e)
         {
             if (OutputImage == null) return;                                // Get out if no output image
@@ -184,6 +199,9 @@ namespace ImageProcessing
                 image.SaveFullPath(saveImageDialog.FileName);
         }
 
+        /// <summary>
+        /// Reset the progressbar
+        /// </summary>
         private void ResetProgressBar()
         {
             progressBar.Visible = true;
@@ -193,29 +211,18 @@ namespace ImageProcessing
             progressBar.Value = 1;
             progressBar.Step = 1;
         }
+
+        /// <summary>
+        /// Hide the progress bar
+        /// </summary>
         private void HideProgressBar()
         {
             progressBar.Visible = false;                                    // Hide progress bar
         }
 
-        //private void FindHighestLowestValue(ref Image Image)
-        //{
-        //    //lowest / highest result
-        //    int highest = Int32.MinValue;
-        //    int lowest = Int32.MaxValue;
-        //    for (int x = 0; x < InputImage.Size.Width; x++)
-        //    {
-        //        for (int y = 0; y < InputImage.Size.Height; y++)
-        //        {
-        //            Color pixelColor = Image.GetColor(x, y);                         // Get the pixel color at coordinate (x,y)
-        //            int pixelIntValue = pixelColor.ToArgb();
-        //            if (highest < pixelIntValue) highest = pixelIntValue;
-        //            if (lowest > pixelIntValue) lowest = pixelIntValue;
-        //            progressBar.PerformStep();                              // Increment progress bar
-        //        }
-        //    }
-        //}
-
+        /// <summary>
+        /// Display InputImage 
+        /// </summary>
         private void DisplayInputImage()
         {
             Bitmap m = new Bitmap(InputImage.Size.Width, InputImage.Size.Height);
@@ -230,7 +237,11 @@ namespace ImageProcessing
             pictureBox1.Image = m;                 // Display input image
         }
 
-        private void DisplayInputImage(System.Drawing.Bitmap image)
+        /// <summary>
+        /// Display OutputImage based on an Bitmap
+        /// </summary>
+        /// <param name="image"></param>
+        private void DisplayOutputImage(System.Drawing.Bitmap image)
         {
             Bitmap m = new Bitmap(InputImage.Size.Width, InputImage.Size.Height);
             // Copy array to output Bitmap
@@ -244,21 +255,10 @@ namespace ImageProcessing
             pictureBox2.Image = m;                 // Display input image
         }
 
-        private int AverageImageValue(Image image)
-        {
-            int val = 0;
-
-            for (int x = 0; x < image.Size.Width; x++)
-            {
-                for (int y = 0; y < image.Size.Height; y++)
-                {
-                    val+= (image.GetPixelColor(x, y));
-                }
-            }
-            val = val / (image.Size.Width * image.Size.Height);
-            return val;
-        }
-
+        /// <summary>
+        /// Display OutputImage based on an Image
+        /// </summary>
+        /// <param name="Image"></param>
         private void DisplayOutputImage(Image Image)
         {
             Bitmap m = new Bitmap(Image.Size.Width, Image.Size.Height);
@@ -270,15 +270,25 @@ namespace ImageProcessing
                     m.SetPixel(x, y, GreyScale.CreateColorFromGrayValue(Image.GetPixelColor(x, y)));               // Set the pixel color at coordinate (x,y)
                 }
             }
-            pictureBox2.Image = (System.Drawing.Image)m;                         // Display output image
+            pictureBox2.Image = m;                         // Display output image
         }
 
+        /// <summary>
+        /// Show the program when clicking on the left bottom of your screen
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             Show();
             WindowState = FormWindowState.Normal;
         }
 
+        /// <summary>
+        /// Hide the program from the windows bar, when the user minimizes the client
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GUI_Resize(object sender, EventArgs e)
         {
             if (FormWindowState.Minimized == WindowState)

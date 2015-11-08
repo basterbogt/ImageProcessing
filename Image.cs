@@ -5,6 +5,9 @@ using System.IO;
 
 namespace ImageProcessing
 {
+    /// <summary>
+    /// Our own Image class, that represents a grayvalued images of full integers
+    /// </summary>
     public class Image
     {
         public static int TotalGrayValues = 256;
@@ -54,6 +57,10 @@ namespace ImageProcessing
             pixelArray[x, y] = color;
         }
 
+        /// <summary>
+        /// Apply an operation on this image.
+        /// </summary>
+        /// <param name="operation">The requisted opereration</param>
         public void Apply(Operation.Operations operation)
         {
             switch (operation)
@@ -82,9 +89,6 @@ namespace ImageProcessing
                 case Operation.Operations.Edges:
                     new Edges().Apply(this);
                     break;
-                case Operation.Operations.Inverse:
-                    new Inverse().Apply(this);
-                    break;
                 case Operation.Operations.Gaussian:
                     new Gaussian().Apply(this);
                     break;
@@ -97,6 +101,10 @@ namespace ImageProcessing
 
         }
 
+        /// <summary>
+        /// Normalise the current Image.
+        /// </summary>
+        /// <returns>Returns a bool wether or not the normalization has succeeded</returns>
         public bool Normalise()
         {
 
@@ -134,10 +142,19 @@ namespace ImageProcessing
             return true;
         }
 
+        /// <summary>
+        /// Save the image to a file.
+        /// </summary>
+        /// <param name="name">Name of the file</param>
+        /// <param name="defaultFolder">Optional: Destination folder</param>
         public void Save(string name, string defaultFolder = null)
         {
             SaveFullPath(GetFileName(name, defaultFolder));
         }
+        /// <summary>
+        /// Save this image to a file
+        /// </summary>
+        /// <param name="name">Full path and name</param>
         public void SaveFullPath(string name)
         {
             Bitmap b = new Bitmap(Size.Width, Size.Height);
@@ -151,6 +168,12 @@ namespace ImageProcessing
             b.Save(name, System.Drawing.Imaging.ImageFormat.Png);
         }
 
+        /// <summary>
+        /// A method to easily generate a filename, based on the current timestamp and the input name
+        /// </summary>
+        /// <param name="name">Name of the file</param>
+        /// <param name="defaultFolder">Optional: Folder destination</param>
+        /// <returns>A string that contains the path and file name (with a timestamp on it)</returns>
         public static string GetFileName(string name, string defaultFolder = null)
         {
 

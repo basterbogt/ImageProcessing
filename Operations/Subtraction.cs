@@ -1,12 +1,18 @@
 ﻿namespace ImageProcessing.Operations
 {
-    class Subtraction
+    /// <summary>
+    /// A class that will subtract the values of the second image from the first image
+    /// </summary>
+    public class Subtraction
     {
         public Subtraction()
         {
 
         }
 
+        /// <summary>
+        /// Subtract the values of the second image from the first image. Normalise the image afterwards.
+        /// </summary>
         public static Image Apply(Image Image, Image Image2)
         {
             Image newImg = new Image(Image.GetPixels(), Image.Size); //Todo: Shouln't we just make a new pixel array here, instead of copying the first image?
@@ -24,6 +30,14 @@
             return newImg;
         }
 
+        /// <summary>
+        /// Subtract the values from the second image from the first image. This method is used for black/white images.
+        /// So all the black values from the second image will be subtracted from the first one.
+        /// Read: Black = 1, White = 0; (This doesn't correspond with the actual values)
+        /// </summary>
+        /// <param name="Image"></param>
+        /// <param name="Image2"></param>
+        /// <returns></returns>
         public static Image ApplyBlackWhite(Image Image, Image Image2)
         {
             Image newImg = new Image(Image.GetPixels(), Image.Size);

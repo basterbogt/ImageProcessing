@@ -2,6 +2,9 @@
 
 namespace ImageProcessing.Structures
 {
+    /// <summary>
+    /// Structure2D class. A structure object with 2 dimensions
+    /// </summary>
     public class Structure2D: Structure
     {
         public Structure2D(): base()
@@ -13,7 +16,10 @@ namespace ImageProcessing.Structures
             SetValues(values);
         }
 
-
+        /// <summary>
+        /// Set the values of this structure
+        /// </summary>
+        /// <param name="values"></param>
         public override void SetValues(params byte[] values)
         {
             if (!Toolbox.IsPerferctSquare(values.Length))

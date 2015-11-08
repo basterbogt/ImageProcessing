@@ -7,6 +7,9 @@ using System.Text;
 
 namespace ImageProcessing.Operations
 {
+    /// <summary>
+    /// Class used to reconstruct the original objects from the file. Used with other operations.
+    /// </summary>
     public class Reconstruction
     {
         public Reconstruction()
@@ -14,6 +17,12 @@ namespace ImageProcessing.Operations
 
         }
 
+        /// <summary>
+        /// Apply the reconstruction
+        /// </summary>
+        /// <param name="original">original image</param>
+        /// <param name="toBeReconstructedImage">image to be reconstructed</param>
+        /// <returns></returns>
         public static Image Apply(Image original, Image toBeReconstructedImage)
         {
 
@@ -49,7 +58,15 @@ namespace ImageProcessing.Operations
             
         }
 
-        public static void ColorNeightbours(int X, int Y, Size size, ref int[,] original, ref int[,] result)
+        /// <summary>
+        /// Private method to reconstruct an object from the original image, based on a pixel from the to be reconstructed image.
+        /// </summary>
+        /// <param name="X">x position of a pixel in the object to be reconstructed</param>
+        /// <param name="Y">y position of a pixel in the object to be reconstructed</param>
+        /// <param name="size">size of the original image</param>
+        /// <param name="original">pixels in the original image</param>
+        /// <param name="result">the resulting pixel array</param>
+        private static void ColorNeightbours(int X, int Y, Size size, ref int[,] original, ref int[,] result)
         {
             Stack<Coordinate> list = new Stack<Coordinate>(); //Using a new stack, combined with an iterative way to loop through the nearby pixels, to prevent stackoverflow error
             list.Push(new Coordinate(X, Y));
@@ -77,7 +94,15 @@ namespace ImageProcessing.Operations
             }
         }
 
-        
+        /// <summary>
+        /// Check if a pixel is legit and may be used (not out of bounce, etc.)
+        /// </summary>
+        /// <param name="x">x position of a pixel that has to be checked</param>
+        /// <param name="y">y position of a pixel that has to be checked</param>
+        /// <param name="size">size of the original image</param>
+        /// <param name="original">pixels in the original image</param>
+        /// <param name="result">the resulting pixel array</param>
+        /// <returns></returns>
         private static bool LegitPixel(int x, int y, Size size, ref int[,] original, ref int[,] result)
         {
             if (x < 0 || x >= size.Width || y < 0 || y >= size.Height) return false;    //Out of bounce
@@ -88,6 +113,10 @@ namespace ImageProcessing.Operations
 
 
     }
+
+    /// <summary>
+    /// Struct to save coordinates in an easy way
+    /// </summary>
     public struct Coordinate
     {
         public int x, y;

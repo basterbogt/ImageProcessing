@@ -1,11 +1,19 @@
 ﻿namespace ImageProcessing.Operations
 {
+    /// <summary>
+    /// Thresholding the current image, changing each pixel to either white or black
+    /// </summary>
     public class NegativeThreshold: Operation
     {
         public NegativeThreshold()
         {
 
         }
+
+        /// <summary>
+        /// Apply this operation to the image
+        /// </summary>
+        /// <param name="image">Image that gets the operation applied to</param>
         public override void Apply(Image image)
         {
             int totalGrayValue = 0;//Start counter
