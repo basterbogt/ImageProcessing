@@ -102,7 +102,6 @@
     <Compile Include="Operations\FixBorder.cs" />
     <Compile Include="Operations\Gaussian.cs" />
     <Compile Include="Operations\HistogramEqualization.cs" />
-    <Compile Include="Operations\Inverse.cs" />
     <Compile Include="Operations\Minval.cs" />
     <Compile Include="Operations\Maxval.cs" />
     <Compile Include="Operations\Subtraction.cs" />

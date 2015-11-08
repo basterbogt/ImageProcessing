@@ -2,11 +2,14 @@
 
 namespace ImageProcessing.Structures
 {
+    /// <summary>
+    /// Structure Element, used for applying Dilation, Erosion, Thinning, etc.
+    /// </summary>
     public abstract class Structure
     {
 
-        public Size StructureSize { set; get; }
-        public bool[][] array;
+        public Size StructureSize { set; get; } //The size of the structure
+        public bool[][] array; //The values of the structure
 
         public Structure()
         {

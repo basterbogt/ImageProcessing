@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace ImageProcessing.Structures
 {
+    /// <summary>
+    /// A wrapper that contains two structures, used for several calculations. Eg: Skeleton by thinning
+    /// </summary>
     public class DoubleStructure2D
     {
         public Size StructureSize { set; get; }

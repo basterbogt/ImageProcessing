@@ -15,6 +15,10 @@ namespace ImageProcessing.Operations
                 
         */
 
+        /// <summary>
+        /// Apply the histogram equalization
+        /// </summary>
+        /// <param name="image"></param>
         public override void Apply(Image image)
         {
 

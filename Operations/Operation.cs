@@ -4,17 +4,32 @@ using System.Drawing;
 
 namespace ImageProcessing.Operations
 {
+    /// <summary>
+    /// Abstract call used for single image operations
+    /// </summary>
     public abstract class Operation
     {
-        public enum Operations { Smoothing, Negative, NegativeThreshold, Opening, Closing, Erosion, Dilation, Reconstruction, Edges, Inverse, Gaussian, HistogramEqualization };
+        /// <summary>
+        /// All the different operations an image can use on itsself (single-image)
+        /// </summary>
+        public enum Operations { Smoothing, Negative, NegativeThreshold, Opening, Closing, Erosion, Dilation, Reconstruction, Edges, Gaussian, HistogramEqualization };
 
         public Operation()
         {
 
         }
 
+        /// <summary>
+        /// Every operation must have an apply method
+        /// </summary>
+        /// <param name="image">Image that gets the operation applied to</param>
         public abstract void Apply(Image image);
 
+        /// <summary>
+        /// A method to apply a given kernel, used by operations that depend on kernels (eg. smoothing)
+        /// </summary>
+        /// <param name="image"></param>
+        /// <param name="kernel"></param>
         public void ApplyKernel(Image image, Kernel kernel)
         {
             int[,] currentPixels = image.GetPixels();
