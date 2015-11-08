@@ -1,14 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ImageProcessing.Operations.BooleanOpererations
+﻿namespace ImageProcessing.Operations.BooleanOpererations
 {
+    /// <summary>
+    /// Given a black/white image, this class returns a new image that only contains the black pixels in both images
+    /// </summary>
     public class OR
     {
 
+        /// <summary>
+        /// Applies XOR, returning a new image that only contains black pixels that are in both images
+        /// </summary>
+        /// <param name="Image">target image 1</param>
+        /// <param name="Image2">target image 2</param>
+        /// <returns>new image that contains the black pixels that are in both images</returns>
         public static Image Apply(Image Image, Image Image2)
         {
             Image newImg = new Image(Image.GetPixels(), Image.Size);
@@ -16,9 +19,9 @@ namespace ImageProcessing.Operations.BooleanOpererations
             {
                 for (int y = 0; y < Image.Size.Height; y++)
                 {
-                    bool img1 = (Image.GetPixelColor(x, y) == Image.Black);
-                    bool img2 = (Image2.GetPixelColor(x, y) == Image.Black);
-                    int result = (img1 || img2) ? Image.Black : Image.White;
+                    bool img1 = (Image.GetPixelColor(x, y) == Image.Black);//if image 1 has a black pixel on this position
+                    bool img2 = (Image2.GetPixelColor(x, y) == Image.Black);//if image 2 has a black pixel on this position
+                    int result = (img1 || img2) ? Image.Black : Image.White;//if either one of the two booleans is true, draw black. Else draw white.
                     newImg.SetPixelColor(x, y, result);
                 }
             }

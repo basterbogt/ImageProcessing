@@ -2,6 +2,9 @@
 
 namespace ImageProcessing.Operations
 {
+    /// <summary>
+    /// Erosion: Removes the border of all objects in an image
+    /// </summary>
     public class Erosion: Operation
     {
         public Erosion()
@@ -9,7 +12,10 @@ namespace ImageProcessing.Operations
 
         }
 
-
+        /// <summary>
+        /// Apply default Erosion
+        /// </summary>
+        /// <param name="image">Target Image</param>
         public override void Apply(Image image)
         {
 
@@ -20,7 +26,11 @@ namespace ImageProcessing.Operations
 
         }
 
-
+        /// <summary>
+        /// Apply erosion with a given structure
+        /// </summary>
+        /// <param name="image">target image</param>
+        /// <param name="structure">given structure</param>
         public void ApplyErosion(Image image, Structure structure)
         {
             int[,] currentPixels = image.GetPixels();

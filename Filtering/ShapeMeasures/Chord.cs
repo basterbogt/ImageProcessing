@@ -2,6 +2,9 @@
 
 namespace ImageProcessing.Filtering.ShapeMeasures
 {
+    /// <summary>
+    /// Chord class, which holds the values of a chord
+    /// </summary>
     public class Chord
     {
         public double Length { get; private set; }

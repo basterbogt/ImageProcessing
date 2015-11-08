@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ImageProcessing.Operations
 {
     /// <summary>
     /// Used to redraw the outer border, in case this gets removed (eg erosion)
+    /// Requires a black/white images.
     /// </summary>
     public class FixBorder
     {
@@ -43,6 +40,14 @@ namespace ImageProcessing.Operations
             return (counter >= neighbours.Count/2) ? Image.Black : Image.White;
 
         }
+
+        /// <summary>
+        /// Find nearby pixels.
+        /// </summary>
+        /// <param name="image"></param>
+        /// <param name="layer"></param>
+        /// <param name="p"></param>
+        /// <returns></returns>
         private static List<Point> FindNeighbours(Image image, int layer, Point p)
         {
             List<Point> neighbours = new List<Point>();

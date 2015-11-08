@@ -1,19 +1,17 @@
 ﻿using ImageProcessing.Filtering.ShapeMeasures;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace ImageProcessing.Filtering
 {
-    public class Object
+    /// <summary>
+    /// Our own object class, that represents an object in our image
+    /// </summary>
+    public class Item
     {
+        public Image image;
         public int xOnOriginalImage { get; private set; }
         public int yOnOriginalImage { get; private set; }
-
-        public Image image;
-
-
+        
         public int Area { get; private set; }
         public double Perimeter { get; private set; }
         public double Compactness { get; private set; }
@@ -26,15 +24,17 @@ namespace ImageProcessing.Filtering
         public double Elongation { get; private set; }
         public double Curvature { get; private set; }
         public double BendingEnergy { get; private set; }
-
         public int Openings { get; private set; }
 
-        public Object(Image image)
+        public Item(Image image)
         {
             Trim(image);
             CalculateValues();
         }
 
+        /// <summary>
+        /// Do the individual object calculation:
+        /// </summary>
         private void CalculateValues()
         {
             Area = ShapeMeasures.Area.Calculate(image);
@@ -42,17 +42,14 @@ namespace ImageProcessing.Filtering
             Compactness = ShapeMeasures.Compactness.Calculate(Area, Perimeter);
             Roundness = ShapeMeasures.Roundness.Calculate(Compactness);
 
-            //if(Area < 500 && Perimeter < 500) { 
+        
             LongestChord = ShapeMeasures.LongestChord.Calculate(image);
             LongestPerpendicularChord = ShapeMeasures.LongestPerpendicularChord.Calculate(image, LongestChord);
             Eccentricity = ShapeMeasures.Eccentricity.Calculate(LongestChord, LongestPerpendicularChord);
-            //}
-            //ShapeMeasures.MinimalBoundingBoxArea.Calculate(image);
-            //ShapeMeasures.Rectangularity.Calculate(image);
-            //ShapeMeasures.Elongation.Calculate(image);
-            //ShapeMeasures.Curvature.Calculate(image);
-            //ShapeMeasures.BendingEnergy.Calculate(image);
-
+            MinimalBoundingBoxArea = ShapeMeasures.MinimalBoundingBoxArea.Calculate(LongestChord, LongestPerpendicularChord);
+            Rectangularity = ShapeMeasures.Rectangularity.Calculate(Area, MinimalBoundingBoxArea);
+            Elongation = ShapeMeasures.Elongation.Calculate(LongestChord, LongestPerpendicularChord);
+            
             Openings = NumberOfHoles.Calculate(image);
 
 

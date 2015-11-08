@@ -8,8 +8,8 @@ namespace ImageProcessing.Filtering
     /// </summary>
     public class Coloring
     {
-        private List<Object> list;
-        public Coloring(List<Object> list)
+        private List<Item> list;
+        public Coloring(List<Item> list)
         {
             this.list = list;
         }
@@ -32,7 +32,7 @@ namespace ImageProcessing.Filtering
             int totalCount = list.Count;
             int countSteps = Image.TotalGrayValues / (totalCount + 1); //256 total grayvalues
             int currentStep = countSteps;
-            foreach (Object obj in list)
+            foreach (Item obj in list)
             {
                 int[,] objImage = obj.image.GetPixels();
                 for (int x = 0; x < obj.image.Size.Width; x++)

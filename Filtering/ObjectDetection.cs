@@ -8,7 +8,7 @@ namespace ImageProcessing.Filtering
     public class ObjectDetection
     {
         private Image originalImage;
-        public List<Object> objects { get; private set; }
+        public List<Item> objects { get; private set; }
 
         private bool IgnoreObjectsNearBorder;
 
@@ -16,7 +16,7 @@ namespace ImageProcessing.Filtering
         {
             this.originalImage = image;
             this.IgnoreObjectsNearBorder = ignoreObjectsNearBorder;
-            objects = new List<Object>();
+            objects = new List<Item>();
         }
 
         public void Apply()
@@ -87,7 +87,7 @@ namespace ImageProcessing.Filtering
             //Ignore Objects that touch the border
             if(!(IgnoreObjectsNearBorder && ObjectNearBorder(newPixels)))
             {
-                objects.Add(new Object(new Image(newPixels, originalImage.Size)));//Add object to object array
+                objects.Add(new Item(new Image(newPixels, originalImage.Size)));//Add object to object array
             }
 
         }

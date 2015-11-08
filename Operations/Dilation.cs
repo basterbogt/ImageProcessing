@@ -2,6 +2,9 @@
 
 namespace ImageProcessing.Operations
 {
+    /// <summary>
+    /// Dilation: Adds a border around all objects in an image
+    /// </summary>
     public class Dilation: Operation
     {
         public Dilation()
@@ -9,6 +12,10 @@ namespace ImageProcessing.Operations
 
         }
 
+        /// <summary>
+        /// Apply default dilation
+        /// </summary>
+        /// <param name="image">target image</param>
         public override void Apply(Image image)
         {
 
@@ -18,7 +25,11 @@ namespace ImageProcessing.Operations
             ApplyDilation(image, structure);
         }
 
-
+        /// <summary>
+        /// Apply specific dialation with a structure
+        /// </summary>
+        /// <param name="image">target image</param>
+        /// <param name="structure">used structure</param>
         public void ApplyDilation(Image image, Structure structure)
         {
             int[,] currentPixels = image.GetPixels();

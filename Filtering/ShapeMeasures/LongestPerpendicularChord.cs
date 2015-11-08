@@ -4,7 +4,10 @@ using System.Drawing;
 
 namespace ImageProcessing.Filtering.ShapeMeasures
 {
-    class LongestPerpendicularChord
+    /// <summary>
+    /// Calculates the longest chord perpendicular to the longest chord
+    /// </summary>
+    public class LongestPerpendicularChord
     {
         public static Chord Calculate(Image image, Chord longestChord)
         {
@@ -15,9 +18,9 @@ namespace ImageProcessing.Filtering.ShapeMeasures
             double margin = 0;
             do
             {
-                lpc = CalculateLongestPerpendicularChord(coordinates, longestChord, margin);
-                margin += 0.01d;
-            } while (lpc.Length <= 0 && margin < 1);
+                lpc = CalculateLongestPerpendicularChord(coordinates, longestChord, margin); //Tries to calculate with the current margin (starts without a margin)
+                margin += 0.01d; //update margin
+            } while (lpc.Length <= 0 && margin < 1); //while we didnt find a perpendicular chord, and the margin is still smaller then 1:
 
             //ObjectOuterPixels.SaveOuterPixelsAsImageWithChords(longestChord, lpc, coordinates, image.Size);
             return lpc;

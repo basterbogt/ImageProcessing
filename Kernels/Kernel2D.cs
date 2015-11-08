@@ -2,6 +2,9 @@
 
 namespace ImageProcessing.Kernels
 {
+    /// <summary>
+    /// Code that represents a 2d kernel, used in several operations to calculate new pixelvalues based on neighbouring pixels
+    /// </summary>
     public class Kernel2D : Kernel
     {
 
@@ -15,6 +18,10 @@ namespace ImageProcessing.Kernels
             SetArray(array);
         }
 
+        /// <summary>
+        /// Set the values of this kernel
+        /// </summary>
+        /// <param name="values">a double array representing the kernel values</param>
         override public void SetKernelValues(params double[] values)
         {
             if (!Toolbox.IsPerferctSquare(values.Length))

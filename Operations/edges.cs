@@ -2,7 +2,10 @@
 
 namespace ImageProcessing.Operations
 {
-    class Edges : Operation
+    /// <summary>
+    /// Edge detection code: Detects edges in an image
+    /// </summary>
+    public class Edges : Operation
     {
         public Edges()
         {

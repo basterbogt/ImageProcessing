@@ -1,11 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace ImageProcessing.Filtering.ShapeMeasures
+﻿namespace ImageProcessing.Filtering.ShapeMeasures
 {
-    class Curvature
+    /// <summary>
+    /// Calculate the curvature: ratio between the number of pixels in the object boundary and the number of pixels where the curvature exceeds a certain threshold
+    /// </summary>
+    public class Curvature
     {
+        public static double Calculate(Item item)
+        {
+            //Todo: Implement this calculation
+            return 0;
+        }
     }
 }

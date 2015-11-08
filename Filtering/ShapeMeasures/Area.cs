@@ -1,21 +1,25 @@
-﻿using System;
-
-namespace ImageProcessing.Filtering.ShapeMeasures
+﻿namespace ImageProcessing.Filtering.ShapeMeasures
 {
+    /// <summary>
+    /// Calculate the Area of an item/object
+    /// </summary>
     public class Area
     {
-        /// <summary>
-        /// Filter to calculate the area of the given object.
-        /// </summary>
         public Area()
         {
 
         }
 
+        /// <summary>
+        /// Calculate the Area of an item/object
+        ///  - loop through each pixel and count if its a black pixel
+        /// </summary>
+        /// <param name="image"></param>
+        /// <returns></returns>
         public static int Calculate(Image image)
         {
             int counter = 0;
-            for (int x = 0; x < image.Size.Width; x++)
+            for (int x = 0; x < image.Size.Width; x++) 
             {
                 for (int y = 0; y < image.Size.Height; y++)
                 {

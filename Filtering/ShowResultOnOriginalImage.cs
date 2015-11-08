@@ -1,21 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace ImageProcessing.Filtering
 {
+    /// <summary>
+    /// Code used to show the detected cups on the original image
+    /// </summary>
     public class ShowResultOnOriginalImage
     {
-        private List<Object> list;
+        private List<Item> list;
         private System.Drawing.Bitmap original;
 
         private int Margin = 10;
         private System.Drawing.Color color = System.Drawing.Color.Red;
 
-        public ShowResultOnOriginalImage(System.Drawing.Bitmap original, List<Object> list)
+        /// <summary>
+        /// Create an image based on the original image and the found objects(cups)
+        /// </summary>
+        /// <param name="original">Original image</param>
+        /// <param name="list">Found objects (cups)</param>
+        public ShowResultOnOriginalImage(System.Drawing.Bitmap original, List<Item> list)
         {
             this.original = (System.Drawing.Bitmap)original.Clone();
             this.list = list;
@@ -25,8 +28,7 @@ namespace ImageProcessing.Filtering
         {
 
             //Loop through each object and paint it on the canvas...
-
-            foreach (Object obj in list)
+            foreach (Item obj in list)
             {
                 int x = obj.xOnOriginalImage - Margin;
                 int y = obj.yOnOriginalImage - Margin;

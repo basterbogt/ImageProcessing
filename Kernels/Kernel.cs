@@ -3,6 +3,9 @@
 namespace ImageProcessing.Kernels
 {
 
+    /// <summary>
+    /// Abstract class for all the different types of kernels. These are used in several operations to calculate new pixelvalues based on neighbouring pixels
+    /// </summary>
     public abstract class Kernel
     {
         public double multiplier { set; get; }

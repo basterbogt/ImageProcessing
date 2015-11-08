@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 
 namespace ImageProcessing.Filtering.ShapeMeasures
@@ -14,7 +13,7 @@ namespace ImageProcessing.Filtering.ShapeMeasures
         private static int Visited = 1;
         public static int Calculate(Image image)
         {
-            Image skeleton = SkeletonByThinning.GenerateSkeleton(image);
+            Image skeleton = SkeletonByThinning.Generate(image);
             int Openings = Count(skeleton);
             //int random = new Random().Next(100, 999);
             //image.Save("Image with " + Openings + " openings - " + random);

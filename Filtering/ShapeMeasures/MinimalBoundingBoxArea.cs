@@ -1,11 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace ImageProcessing.Filtering.ShapeMeasures
+﻿namespace ImageProcessing.Filtering.ShapeMeasures
 {
-    class MinimalBoundingBoxArea
+    /// <summary>
+    /// Calculate the minimal Bounding box area
+    /// </summary>
+    public class MinimalBoundingBoxArea
     {
+        public static double Calculate(Chord longestChord, Chord longestPerpendicularChord)
+        {
+            return longestChord.Length * longestPerpendicularChord.Length;
+        }
     }
 }
