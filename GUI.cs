@@ -2,6 +2,7 @@
 using ImageProcessing.Operations;
 using System;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace ImageProcessing
@@ -22,35 +23,53 @@ namespace ImageProcessing
         {
             InitializeComponent();
             applyButton.Enabled = false;
+
+            LoadInitialImage();
+        }
+
+        private void LoadInitialImage()
+        {
+            string initialImage = @"cupotastic.png";
+            if (File.Exists(initialImage))
+            {
+                LoadImage(initialImage);
+            }
+
         }
 
         private void LoadImageButton_Click(object sender, EventArgs e)
         {
            if (openImageDialog.ShowDialog() == DialogResult.OK)             // Open File Dialog
             {
-                string file = openImageDialog.FileName;                     // Get the file name
-                imageFileName.Text = file;                                  // Show file name
-                if (InputImage != null) InputImage.Dispose();               // Reset image
-                InputImage = new Bitmap(file);                              // Create new Bitmap from file
-                if (InputImage.Size.Height <= 0 || InputImage.Size.Width <= 0 ||
-                    InputImage.Size.Height > 512 || InputImage.Size.Width > 512) // Dimension check
-                    MessageBox.Show("Error in image dimensions (have to be > 0 and <= 512)");
-                else
+                string test = openImageDialog.FileName;
+                LoadImage(test);
+            }
+        }
+
+        private void LoadImage(string file)
+        {
+            imageFileName.Text = file;                                  // Show file name
+            if (InputImage != null) InputImage.Dispose();               // Reset image
+            InputImage = new Bitmap(file);                              // Create new Bitmap from file
+            if (InputImage.Size.Height <= 0 || InputImage.Size.Width <= 0 ||
+                InputImage.Size.Height > 512 || InputImage.Size.Width > 512) // Dimension check
+                MessageBox.Show("Error in image dimensions (have to be > 0 and <= 512)");
+            else
+            {
+                image = null;
+                original = (Bitmap)InputImage.Clone();
+                if (OutputImage != null)
                 {
-                    image = null;
-                    original = (Bitmap)InputImage.Clone();
-                    if (OutputImage != null)
-                    {
-                        OutputImage.Dispose();
-                        OutputImage = null;
-                    }
-                    DisplayInputImage();                 // Display input image
-                    currentStep = 0;
-                    pictureBox2.Image = null;
-                    this.Text = "Press 'apply' to start!";
-                    applyButton.Enabled = true;
-                    ProcessingDone = false;
+                    OutputImage.Dispose();
+                    OutputImage = null;
                 }
+                DisplayInputImage();                 // Display input image
+                currentStep = 0;
+                pictureBox2.Image = null;
+                this.Text = "Press 'apply' to start!";
+                applyButton.Enabled = true;
+                ProcessingDone = false;
+                Array.ForEach(Directory.GetFiles(Program.ImageDirectory + @"\"), File.Delete);
             }
         }
 
@@ -100,63 +119,57 @@ namespace ImageProcessing
             {
                 case 0:
                     text = "Image to Gray";
-                    this.Text = text + " <Calculating!>";
+                    this.Text = text;
+                    InputImage.Save(Image.GetFileName("Step " + (currentStep) + " - Original Image"), System.Drawing.Imaging.ImageFormat.Png);
                     image = new Image(InputImage);
+                    image.Save("Step " + (currentStep + 1) + " - " + text);
                     break;
                 case 1:
-                    text = "HistogramEqualization";
-                    this.Text = text + " <Calculating!>";
-                    image.Apply(Operation.Operations.HistogramEqualization);
+                    text = "Smoothing (Gaussian)";
+                    this.Text = text;
+                    image.Apply(Operation.Operations.Gaussian);
+                    image.Apply(Operation.Operations.Gaussian);
+                    image.Save("Step " + (currentStep + 1) + " - " + text);
                     break;
                 case 2:
-                    text = "Smoothing (Gaussian)";
-                    this.Text = text + " <Calculating!>";
-                    image.Apply(Operation.Operations.Gaussian);
-                    image.Apply(Operation.Operations.Gaussian);
+                    text = "NegativeThreshold";
+                    this.Text = text;
+                    image.Apply(Operation.Operations.NegativeThreshold);
+                    image.Save("Step " + (currentStep + 1) + " - " + text);
                     break;
                 case 3:
-                    text = "NegativeThreshold && Opening";
-                    this.Text = text + " <Calculating!>";
-                    image.Apply(Operation.Operations.NegativeThreshold);
+                    text = "Opening";
+                    this.Text = text;
                     image.Apply(Operation.Operations.Opening);
+                    image.Save("Step " + (currentStep + 1) + " - " + text);
                     break;
                 case 4:
-                    text = "Inverse";
-                    this.Text = text + " <Calculating!>";
-                    //deze inverse moet een toggle hebben voor licht of donker van het plaatje
-                    //if (AverageImageValue(image) > 128)
-                    //{
-                    //    image.Apply(Operation.Operations.Inverse);
-                    //}             
+                    text = "Closing";
+                    this.Text = text;
+                    image.Apply(Operation.Operations.Closing);
+                    image.Save("Step " + (currentStep + 1) + " - " + text);
                     break;
                 case 5:
-                    text = "Opening";
-                    this.Text = text + " <Calculating!>";
-                    image.Apply(Operation.Operations.Opening);
-                    break;
-                case 6:
-                    text = "Closing";
-                    this.Text = text + " <Calculating!>";
-                    image.Apply(Operation.Operations.Closing);
-                    break;
-                case 7:
                     text = "Object Filtering";
-                    this.Text = text + " <Calculating!>";
+                    this.Text = text;
                     ObjectDetection od = new ObjectDetection(image, true);
                     od.Apply();
                     of = new ObjectFiltering(od.objects);
                     of.Apply();
                     image = new Coloring(of.coffeeMugObjectList).ConstructNewImage(image.Size);
+                    image.Save("Step " + (currentStep + 1) + " - " + text);
                     break;
                 default:
                     text = "Result on Original Image";
-                    this.Text = text + " <Calculating!>";
+                    this.Text = text;
                     ProcessingDone = true;
-                    DisplayInputImage(new ShowResultOnOriginalImage(original, of.coffeeMugObjectList).ConstructNewImage());
+                    Bitmap result = new ShowResultOnOriginalImage(original, of.coffeeMugObjectList).ConstructNewImage();
+                    DisplayInputImage(result);
+                    result.Save(Image.GetFileName("Step " + (currentStep + 1) + " - " + text), System.Drawing.Imaging.ImageFormat.Png);
                     break;
             }
 
-            if (text != null && text != "") this.Text = text;
+            if (text != null && text != "") this.label2.Text = text;
 
             currentStep++;
 

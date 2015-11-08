@@ -7,20 +7,24 @@
 
         }
 
-        public override void Apply(Image Image)
+        public override void Apply(Image image)
         {
 
-            Image original = new Image(Image.GetPixels(), Image.Size);
+            Image original = new Image(image.GetPixels(), image.Size);
 
             int intensity = 4;
             
             //Apply Dilation
             for(int i = 0; i < intensity; i++)
-            Image.Apply(Operation.Operations.Dilation);
+            image.Apply(Operation.Operations.Dilation);
 
             //Apply Erosion
             for (int i = 0; i < intensity; i++)
-                Image.Apply(Operation.Operations.Erosion);
+                image.Apply(Operation.Operations.Erosion);
+
+            //fix border:
+            FixBorder.Fix(image, intensity);
+        
 
         }
     }

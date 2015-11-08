@@ -37,7 +37,7 @@ namespace ImageProcessing.Filtering.ShapeMeasures
 
                 Visit(ref visited, point);
                 coordinates.Add(point);
-                //ObjectOuterPixels.SaveOuterPixelsAskImage(coordinates, image.Size);//uncomment this to view each step :D
+                //ObjectOuterPixels.SaveOuterPixelsAsImage(coordinates, image.Size);//uncomment this to view each step :D
 
                 List<Point> neighbours = FindNeighbours(image, point); //find black neighbours
                 if (neighbours.Count >= 8) continue;
@@ -131,7 +131,7 @@ namespace ImageProcessing.Filtering.ShapeMeasures
             }
 
             Image image = new Image(visited, size);
-            //image.Save("OuterPixel");
+            image.Save("OuterPixel");
 
         }
         public static void SaveOuterPixelsAsImageWithChords(Chord longestChord, Chord lpc, List<Point> coordinates, Size size)
@@ -147,8 +147,11 @@ namespace ImageProcessing.Filtering.ShapeMeasures
             {
                 graphics.DrawLine(red, longestChord.StartingPoint, longestChord.EndingPoint);
                 graphics.DrawLine(red, lpc.StartingPoint, lpc.EndingPoint);
-                b.Save(Program.ImageDirectory + "\\" + "Chords through object - " + DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond + ".png", System.Drawing.Imaging.ImageFormat.Png);
+                b.Save(Image.GetFileName("Chords through object"), System.Drawing.Imaging.ImageFormat.Png);
+                //Image image = new Image(b);
+                //image.Save("Chords through object");
             }
+            //Doesnt work quite yet...not sure why.
 
         }
 

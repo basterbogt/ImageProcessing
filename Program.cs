@@ -14,7 +14,6 @@ namespace ImageProcessing
         [STAThread]
         static void Main()
         {
-            Array.ForEach(Directory.GetFiles(ImageDirectory + @"\"), File.Delete);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new GUI());

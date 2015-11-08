@@ -99,6 +99,7 @@
     <Compile Include="Operations\BooleanOpererations\AND.cs" />
     <Compile Include="Operations\BooleanOpererations\OR.cs" />
     <Compile Include="Operations\BooleanOpererations\XOR.cs" />
+    <Compile Include="Operations\FixBorder.cs" />
     <Compile Include="Operations\Gaussian.cs" />
     <Compile Include="Operations\HistogramEqualization.cs" />
     <Compile Include="Operations\Inverse.cs" />
