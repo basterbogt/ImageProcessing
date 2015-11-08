@@ -11,7 +11,8 @@ namespace ImageProcessing.Filtering
         public Image image;
         public int xOnOriginalImage { get; private set; }
         public int yOnOriginalImage { get; private set; }
-        
+
+        #region ShapeMeasures
         public int Area { get; private set; }
         public double Perimeter { get; private set; }
         public double Compactness { get; private set; }
@@ -25,6 +26,7 @@ namespace ImageProcessing.Filtering
         public double Curvature { get; private set; }
         public double BendingEnergy { get; private set; }
         public int Openings { get; private set; }
+        #endregion
 
         public Item(Image image)
         {
