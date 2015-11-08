@@ -12,6 +12,7 @@ namespace ImageProcessing
         private Bitmap InputImage;
         private Bitmap OutputImage;
 
+        private bool ApplyAll = false;
         private bool ProcessingDone = false;
         private int currentStep = 0;
 
@@ -22,7 +23,7 @@ namespace ImageProcessing
         public GUI()
         {
             InitializeComponent();
-            applyButton.Enabled = false;
+            SetButtonEnabled(false);
 
             LoadInitialImage();
         }
@@ -79,14 +80,31 @@ namespace ImageProcessing
                 currentStep = 0;
                 pictureBox2.Image = null;
                 this.Text = "Press 'apply' to start!";
-                applyButton.Enabled = true;
+                SetButtonEnabled(true);
                 ProcessingDone = false;
                 Array.ForEach(Directory.GetFiles(Program.ImageDirectory + @"\"), File.Delete);
             }
         }
 
+
+        private void ApplyAllButtonClick(object sender, EventArgs e)
+        {
+            SetButtonEnabled(false);
+            ApplyAll = true;
+
+            while (!ProcessingDone)
+            {
+                Apply();
+            }
+            
+            ApplyAll = false;
+        }
+
         private void applyButton_Click(object sender, EventArgs e)
         {
+            Apply();
+        }
+        private void Apply() { 
             if (InputImage == null) return;                                 // Get out if no input image
             if (OutputImage != null)
             {
@@ -97,7 +115,7 @@ namespace ImageProcessing
             }
             OutputImage = new Bitmap(InputImage.Size.Width, InputImage.Size.Height); // Create new output image
 
-            applyButton.Enabled = false;
+            SetButtonEnabled(false);
 
             /**********************/
             /* Setup progress bar */
@@ -116,7 +134,7 @@ namespace ImageProcessing
             {
                 //Display Image
                 DisplayOutputImage(image);
-                applyButton.Enabled = true;
+                SetButtonEnabled(true);
             }
 
         }
@@ -295,5 +313,13 @@ namespace ImageProcessing
             if (FormWindowState.Minimized == WindowState)
                 Hide();
         }
+
+        private void SetButtonEnabled(bool enabled)
+        {
+            if (ApplyAll) return; //if busy calculation all, dont touch those buttons
+            applyButton.Enabled = enabled;
+            applyAllButton.Enabled = enabled;
+        }
+
     }
 }
