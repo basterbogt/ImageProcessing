@@ -194,6 +194,7 @@ namespace ImageProcessing
                     this.Text = text;
                     ProcessingDone = true;
                     Bitmap result = new ShowResultOnOriginalImage(original, of.coffeeMugObjectList).ConstructNewImage();
+                    image = new Image(result);//Todo: This will make this a grayscale image, so actually gotta change some things so this wont be the case. (So, save as in last step = black/white)
                     DisplayOutputImage(result);
                     result.Save(Image.GetFileName("Step " + (currentStep + 1) + " - " + text), System.Drawing.Imaging.ImageFormat.Png);
                     break;
