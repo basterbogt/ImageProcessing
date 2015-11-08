@@ -136,9 +136,7 @@ namespace ImageProcessing
 
         public void Save(string name, string defaultFolder = null)
         {
-            if (defaultFolder == null) defaultFolder = Program.ImageDirectory;
-            Directory.CreateDirectory(defaultFolder);
-            SaveFullPath(defaultFolder + "\\" + name + " - " + DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond + ".png");
+            SaveFullPath(GetFileName(name, defaultFolder));
         }
         public void SaveFullPath(string name)
         {
@@ -151,6 +149,16 @@ namespace ImageProcessing
                 }
             }
             b.Save(name, System.Drawing.Imaging.ImageFormat.Png);
+        }
+
+        public static string GetFileName(string name, string defaultFolder = null)
+        {
+
+            if (defaultFolder == null) defaultFolder = Program.ImageDirectory;
+            Directory.CreateDirectory(defaultFolder);
+            DateTime dateValue = new DateTime(DateTime.Now.Ticks);
+            String time = dateValue.ToString("dd-MM-yyyy HH.mm.ss.fff");
+            return defaultFolder + "\\" + name + " - " + time + ".png";
         }
         
     }

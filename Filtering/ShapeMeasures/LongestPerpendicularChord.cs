@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 
 namespace ImageProcessing.Filtering.ShapeMeasures
 {
@@ -21,7 +19,7 @@ namespace ImageProcessing.Filtering.ShapeMeasures
                 margin += 0.01d;
             } while (lpc.Length <= 0 && margin < 1);
 
-            ObjectOuterPixels.SaveOuterPixelsAsImageWithChords(longestChord, lpc, coordinates, image.Size);
+            //ObjectOuterPixels.SaveOuterPixelsAsImageWithChords(longestChord, lpc, coordinates, image.Size);
             return lpc;
 
         }

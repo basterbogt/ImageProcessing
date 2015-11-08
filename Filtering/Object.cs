@@ -42,11 +42,11 @@ namespace ImageProcessing.Filtering
             Compactness = ShapeMeasures.Compactness.Calculate(Area, Perimeter);
             Roundness = ShapeMeasures.Roundness.Calculate(Compactness);
 
-            if(Area < 500 && Perimeter < 500) { 
+            //if(Area < 500 && Perimeter < 500) { 
             LongestChord = ShapeMeasures.LongestChord.Calculate(image);
             LongestPerpendicularChord = ShapeMeasures.LongestPerpendicularChord.Calculate(image, LongestChord);
             Eccentricity = ShapeMeasures.Eccentricity.Calculate(LongestChord, LongestPerpendicularChord);
-            }
+            //}
             //ShapeMeasures.MinimalBoundingBoxArea.Calculate(image);
             //ShapeMeasures.Rectangularity.Calculate(image);
             //ShapeMeasures.Elongation.Calculate(image);
