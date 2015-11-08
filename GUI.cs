@@ -137,9 +137,10 @@ namespace ImageProcessing
                     image.Save("Step " + (currentStep + 1) + " - " + text);
                     break;
                 case 1:
-                    text = "Edges";
+                    text = "Smoothing (Gaussian)";
                     this.Text = text;
-                    image.Apply(Operation.Operations.Edges);
+                    image.Apply(Operation.Operations.Gaussian);
+                    image.Apply(Operation.Operations.Gaussian);
                     image.Save("Step " + (currentStep + 1) + " - " + text);
                     break;
                 case 2:
