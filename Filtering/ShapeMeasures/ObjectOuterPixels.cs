@@ -18,7 +18,6 @@ namespace ImageProcessing.Filtering.ShapeMeasures
 
         public static List<Point> OuterPoints(Image image)
         {
-            image.Save("test");
             List<Point> coordinates = new List<Point>();
             Point p = Toolbox.FindFirstPixel(image);
             if (image.GetPixelColor(p.X, p.Y) == Image.White) return coordinates;//In case we found an empty starting point
@@ -38,7 +37,7 @@ namespace ImageProcessing.Filtering.ShapeMeasures
 
                 Visit(ref visited, point);
                 coordinates.Add(point);
-                ObjectOuterPixels.SaveOuterPixelsAsImage(coordinates, image.Size);
+                //ObjectOuterPixels.SaveOuterPixelsAskImage(coordinates, image.Size);//uncomment this to view each step :D
 
                 List<Point> neighbours = FindNeighbours(image, point); //find black neighbours
                 if (neighbours.Count >= 8) continue;
@@ -50,7 +49,7 @@ namespace ImageProcessing.Filtering.ShapeMeasures
                     }
                 }
             }
-            ObjectOuterPixels.SaveOuterPixelsAsImage(coordinates, image.Size);
+            //ObjectOuterPixels.SaveOuterPixelsAsImage(coordinates, image.Size);//uncomment this to view result
 
             return coordinates;
         }
@@ -132,7 +131,7 @@ namespace ImageProcessing.Filtering.ShapeMeasures
             }
 
             Image image = new Image(visited, size);
-            image.Save("OuterPixel");
+            //image.Save("OuterPixel");
 
         }
         public static void SaveOuterPixelsAsImageWithChords(Chord longestChord, Chord lpc, List<Point> coordinates, Size size)

@@ -100,71 +100,57 @@ namespace ImageProcessing
             {
                 case 0:
                     text = "Image to Gray";
+                    this.Text = text + " <Calculating!>";
                     image = new Image(InputImage);
                     break;
-
                 case 1:
-                    text = "Smoothing";
-                    image.Apply(Operation.Operations.Gaussian);
-                    image.Apply(Operation.Operations.Gaussian);
+                    text = "HistogramEqualization";
+                    this.Text = text + " <Calculating!>";
+                    image.Apply(Operation.Operations.HistogramEqualization);
                     break;
-
                 case 2:
-                    text = "Edges";
-                    
-
-                    //image.Apply(Operation.Operations.Edges);
-                    image.Apply(Operation.Operations.NegativeThreshold);
-
-                    image.Apply(Operation.Operations.Opening);
-                    image.Apply(Operation.Operations.Opening);
-
-                    Image temp = new Image(image.GetPixels(), image.Size);
-                    
-                    image = new Image(image.GetPixels(), image.Size);
-
-                    //image = Addition.Apply(image, temp);
-                    //image = Difference.Apply(image, temp);
-
-                    
-
-                    //Image image2 = Maxval.Apply(new Image(image.GetPixels(), image.Size), temp);
-                    image = new Image(image.GetPixels(), image.Size);
+                    text = "Smoothing (Gaussian)";
+                    this.Text = text + " <Calculating!>";
+                    image.Apply(Operation.Operations.Gaussian);
+                    image.Apply(Operation.Operations.Gaussian);
                     break;
-
                 case 3:
-                    text = "Dilation";
-                    /*
-                    //deze inverse moet een toggle hebben voor licht of donker van het plaatje
-                    if (AverageImageValue(image) > 128)
-                    {
-                        image.Apply(Operation.Operations.Inverse);
-                    }
-                    image.Apply(Operation.Operations.Dilation);
-                    image.Apply(Operation.Operations.Dilation);
-                    image.Apply(Operation.Operations.Dilation);
-                    image.Apply(Operation.Operations.Dilation);
-
-                    image.Apply(Operation.Operations.Inverse);
-                    */                
-                    break;
-
-                case 4:
-                    text = "Opening";
+                    text = "NegativeThreshold && Opening";
+                    this.Text = text + " <Calculating!>";
+                    image.Apply(Operation.Operations.NegativeThreshold);
                     image.Apply(Operation.Operations.Opening);
                     break;
-
+                case 4:
+                    text = "Inverse";
+                    this.Text = text + " <Calculating!>";
+                    //deze inverse moet een toggle hebben voor licht of donker van het plaatje
+                    //if (AverageImageValue(image) > 128)
+                    //{
+                    //    image.Apply(Operation.Operations.Inverse);
+                    //}             
+                    break;
                 case 5:
+                    text = "Opening";
+                    this.Text = text + " <Calculating!>";
+                    image.Apply(Operation.Operations.Opening);
+                    break;
+                case 6:
+                    text = "Closing";
+                    this.Text = text + " <Calculating!>";
+                    image.Apply(Operation.Operations.Closing);
+                    break;
+                case 7:
                     text = "Object Filtering";
+                    this.Text = text + " <Calculating!>";
                     ObjectDetection od = new ObjectDetection(image, true);
                     od.Apply();
                     of = new ObjectFiltering(od.objects);
                     of.Apply();
                     image = new Coloring(of.coffeeMugObjectList).ConstructNewImage(image.Size);
                     break;
-                    
                 default:
-                    text = "Done";
+                    text = "Result on Original Image";
+                    this.Text = text + " <Calculating!>";
                     ProcessingDone = true;
                     DisplayInputImage(new ShowResultOnOriginalImage(original, of.coffeeMugObjectList).ConstructNewImage());
                     break;

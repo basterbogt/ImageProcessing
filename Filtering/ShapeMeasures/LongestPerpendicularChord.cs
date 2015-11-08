@@ -13,6 +13,21 @@ namespace ImageProcessing.Filtering.ShapeMeasures
 
             List<Point> coordinates = ObjectOuterPixels.OuterPoints(image);
 
+            Chord lpc;
+            double margin = 0;
+            do
+            {
+                lpc = CalculateLongestPerpendicularChord(coordinates, longestChord, margin);
+                margin += 0.01d;
+            } while (lpc.Length <= 0 && margin < 1);
+
+            ObjectOuterPixels.SaveOuterPixelsAsImageWithChords(longestChord, lpc, coordinates, image.Size);
+            return lpc;
+
+        }
+
+        private static Chord CalculateLongestPerpendicularChord(List<Point> coordinates, Chord longestChord, double margin = 0)
+        {
             double length = 0;
             double rotation = 0;
             Point StartingPoint = new Point();
@@ -25,8 +40,10 @@ namespace ImageProcessing.Filtering.ShapeMeasures
                     //if (p2.X > p1.X) continue;
                     //if (p2.Y > p1.Y) continue;
 
-                    double slope = (p2.Y - p1.Y) / ((double)(p2.X - p1.X));
-                    if (-1 / slope != longestChord.Rotation) continue;
+                    double slope = (-1.0d / ((p2.Y - p1.Y) / ((double)(p2.X - p1.X))));
+                    double slopeTarget = (longestChord.Rotation);
+                    if (!(slope >= slopeTarget * (1.0d - margin) && slope <= slopeTarget * (1.0d + margin))) continue;
+                    
 
                     double lengthCurrentChord = Math.Sqrt(Math.Pow(p1.X - p2.X, 2) + Math.Pow(p1.Y - p2.Y, 2));
                     if (lengthCurrentChord > length)
@@ -40,10 +57,7 @@ namespace ImageProcessing.Filtering.ShapeMeasures
                 }
             }
 
-            Chord lpc = new Chord(length, rotation, StartingPoint, EndingPoint);
-            ObjectOuterPixels.SaveOuterPixelsAsImageWithChords(longestChord, lpc, coordinates, image.Size);
-            return lpc;
-
+            return new Chord(length, rotation, StartingPoint, EndingPoint);
         }
     }
 }

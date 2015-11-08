@@ -27,7 +27,7 @@ namespace ImageProcessing.Filtering
                 */
                 if (potentialObject.Area < 25) continue; //Ignore small objects
                 if (potentialObject.Openings != 1) continue; //Make sure there is an opening. Without it, it's not a mug
-                if (potentialObject.Eccentricity > 0.8 && potentialObject.Eccentricity < 1.2) continue; //A mug is not round. This code will remove circles/ellipses from our results
+                if (potentialObject.Eccentricity > 0.9 && potentialObject.Eccentricity < 1.1) continue; //A mug is not round. This code will remove circles/ellipses from our results
                 
 
                 coffeeMugObjectList.Add(potentialObject);

@@ -8,7 +8,7 @@ namespace ImageProcessing.Filtering.ShapeMeasures
     /// Calculating the amount of openings in an object, first by calculating the skeleton and then calculating the amount of openings.
     /// Requires one object per image. If there are more then one objects in the same image, only one will be calculated, and it will be kinda random which one..
     /// </summary>
-    public class CountOpenings
+    public class NumberOfHoles
     {
         //private static int Unvisited = 0;
         private static int Visited = 1;
